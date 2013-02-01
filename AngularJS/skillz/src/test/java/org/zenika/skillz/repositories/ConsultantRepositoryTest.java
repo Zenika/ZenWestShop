@@ -27,7 +27,7 @@ public abstract class ConsultantRepositoryTest {
     public void findAll_should_return_a_collection_of_Consultants() {
         Collection<Consultant> returnedConsultants = consultantRepository.findAll();
 
-        assertThat(returnedConsultants).isNotEmpty();
+        assertThat(returnedConsultants).isEmpty();
     }
 
     @Test
