@@ -1,0 +1,28 @@
+*.class
+
+# Package Files #
+*.war
+*.jar
+
+# boilerplate #
+.apt_generated/
+.metadata/
+RemoteSystemsTempFiles/
+Servers/
+.DS_Store
+target
+
+
+# eclipse files
+.classpath
+.settings
+.project
+
+# more caches and things from deploy #
+*/webapp/WEB-INF/deploy/
+*/webapp/WEB-INF/classes/
+*/webapp/WEB-INF/lib/
+
+# intellij files
+*.iml
+.idea/
