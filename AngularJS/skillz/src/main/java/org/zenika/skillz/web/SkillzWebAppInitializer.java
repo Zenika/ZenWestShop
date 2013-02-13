@@ -24,11 +24,12 @@ public class SkillzWebAppInitializer implements WebApplicationInitializer {
         dispatcherContext.register(DispatcherConfig.class);
 
         ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", new DispatcherServlet(dispatcherContext));
-        dispatcher.addMapping("/");
+        dispatcher.addMapping("/services/*");
 
         FilterRegistration charEncodingfilterReg = container.addFilter("CharacterEncodingFilter", CharacterEncodingFilter.class);
         charEncodingfilterReg.setInitParameter("encoding", "UTF-8");
         charEncodingfilterReg.setInitParameter("forceEncoding", "true");
         charEncodingfilterReg.addMappingForUrlPatterns(null, false, "/*");
     }
+
 }

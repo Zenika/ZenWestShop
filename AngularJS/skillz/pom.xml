@@ -142,6 +142,7 @@
                     <preloadSources>
                         <source>lib/angular/angular.js</source>
                         <source>lib/angular/angular-mocks.js</source>
+                        <source>jquery-1.9.1.min.js</source>
                     </preloadSources>
                 </configuration>
             </plugin>
