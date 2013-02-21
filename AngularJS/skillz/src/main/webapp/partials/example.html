@@ -3,59 +3,30 @@
         <img src="/img/default.jpg" />
     </span>
     <span class="span8">
-        <h2>Raphaël Delaporte</h2>
-        <h3>Consultant Java/ JEE / SOA / Messaging</h3>
-        <h3>Directeur Technique Zenika Ouest</h3>
-        <p>6 ans d'expérience</p>
-        <p>raphael.delaporte@zenika.com</p>
-        <p>http://bpelsoa.blogspot.com</p>
+        <h2>{{cv.name}}</h2>
+        <h3>{{cv.title1}}</h3>
+        <h3>{{cv.title2}}</h3>
+        <p>{{cv.exp}}</p>
+        <p>{{cv.mail}}</p>
+        <p>{{cv.blog}}</p>
     </span>
 </div>
 
 <div class="span12">
     <h4>Profil</h4>
     <table class="table">
-        <tr>
-            <td>Consultant</td>
-            <td>Expertise SOA sur des projets télécoms en contexte offshore (Inde)<br/>
-                Expertise prototypage de solution de messaging (AMQP / JMS)<br/>
-                Expertise Java embarqué – Exécution de JVM sur microcontrôleurs STM</td>
-        </tr>
-        <tr>
-            <td>Architecte</td>
-            <td>Architecte logiciel sur le projet de refonte du SI SFR (SOA, JavaEE)<br/>
-                Architecte JavaEE et SOA dans un contexte offshore (Inde)</td>
-        </tr>
-        <tr>
-            <td>Conférencier</td>
-            <td>SOA – Petits déjeuners Zenika Rennes & Nantes – octobre 2012<br/>
-                Apache Camel – JUG Rennes & Nantes – novembre 2011 & mai 2012<br/>
-                Spring Integration – Société Générale Nantes – décembre 2011<br/>
-                AMQP – What’s Next Replay Rennes & Nantes – novembre 2011</td>
-        </tr>
-        <tr>
-            <td>Formateur</td>
-            <td>SOA – BPEL – AMQP – JMS – ESB – Java – Web Services – RabbitMQ</td>
+        <tr ng-repeat="profil in cv.profil">
+            <td>{{profil.title}}</td>
+            <td>
+                <p ng-repeat="desc in profil.desc">{{desc}}</p>
         </tr>
     </table>
 
     <h4>Compétences</h4>
     <table class="table">
-        <tr>
-            <td>Java</td>
-            <td>Java – Java EE – Spring Framework – Java ME – CLDC – AOP</td>
-        </tr>
-        <tr>
-            <td>Tuning</td>
-            <td>VisualGC – Jconsole – JVMStat – Samurai – Yourkit Java Profiler – Jprofiler</td>
-        </tr>
-        <tr>
-            <td>Persistance</td>
-            <td>Hibernate – JPA – MyBatis – JDBC</td>
-        </tr>
-        <tr>
-            <td>SOA / Intégration</td>
-            <td>BPEL (Oracle SOA Suite / Apache ODE) – EIP (Apache Camel / Spring Integration) – ESB (ServiceMix, Mule) – Web Services (WS-* / REST – Apache CXF  / Jersey) – XML/XSLT - jBPM</td>
+        <tr ng-repeat="competence in cv.competences">
+            <td>{{competence.title}}</td>
+            <td>{{competence.desc}}</td>
         </tr>
     </table>
 

@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
 <head>
     <title>Skillz</title>
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
     <link href="css/app.css" rel="stylesheet" media="screen"/>
-    <link href="css/bootstrap-united.css" rel="stylesheet" media="screen"/>
+    <link href="css/bootstrap.css" rel="stylesheet" media="screen"/>
+    <script src="js/lib/angular/angular.js"></script>
+    <script src="js/lib/angular/angular-resource.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/directives.js"></script>
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script src="js/bootstrap.js"></script>
     <style>
         body {
             padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
@@ -25,12 +34,12 @@
 
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <li><a id="homeMenu" href="#" onclick="$('#homeContainer').load('partials/home.html')">Home</a></li>
-                    <li><a id="exampleMenu" href="#example" onclick="$('#homeContainer').load('partials/example.html')">Example</a></li>
+                    <li><a id="homeMenu" href="#">Home</a></li>
+                    <li><a id="exampleMenu" href="#/example">Example</a></li>
                 </ul>
 
                 <form class="navbar-search pull-right" action="" onsubmit="return false">
-                    <input class="search-query span2" placeholder="Search" type="text" onchange="$('#homeContainer').load('partials/search.html')">
+                    <input class="search-query span2" placeholder="Search" type="text">
                 </form>
             </div>
             <!--/.nav-collapse -->
@@ -38,37 +47,10 @@
     </div>
 </div>
 
-<div id="homeContainer" class="container">
+<div ng-view id="homeContainer" class="container">
     <h1>Zen West Shop AngularJS</h1>
 
     <p>Search, find CVs.</p>
 </div>
-
-<script src="js/lib/angular/angular.js"></script>
-<script src="js/app.js"></script>
-<script src="js/services.js"></script>
-<script src="js/controllers.js"></script>
-<script src="js/filters.js"></script>
-<script src="js/directives.js"></script>
-<script src="js/jquery-1.9.1.min.js"></script>
-<script src="js/bootstrap.js"></script>
-
-<script type="text/javascript">
-    $(function () {
-        $("#homeMenu").click(function (e) {
-            $('#homeContainer').load('partials/home.html')
-        });
-    });
-    $(function () {
-        $("#exampleMenu").click(function (e) {
-            $('#homeContainer').load('partials/example.html')
-        });
-    });
-    $(function () {
-        $("#searchMenu").click(function (e) {
-            $('#homeContainer').load('partials/search.html')
-        });
-    });
-</script>
 </body>
 </html>
