@@ -21,7 +21,7 @@ public class ConsultantController {
     @Autowired
     private ConsultantRepository consultantRepository;
 
-    @RequestMapping(value = "/consultant", method = RequestMethod.GET)
+    @RequestMapping(value = "/consultants", method = RequestMethod.GET)
     public @ResponseBody List<Consultant> list() {
         List<Consultant> consultants = new ArrayList<Consultant>(consultantRepository.findAll());
         LOGGER.debug("Consultants : {}", consultants);
@@ -29,12 +29,12 @@ public class ConsultantController {
 
     }
 
-    @RequestMapping(value = "/consultant/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/consultants/{id}", method = RequestMethod.GET)
     public @ResponseBody Consultant getById(@PathVariable long id) {
         return consultantRepository.findById(id);
     }
 
-    @RequestMapping(value = "/consultant", method = RequestMethod.POST)
+    @RequestMapping(value = "/consultants", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public @ResponseBody Consultant create(@RequestBody Consultant consultant) {
 //        long id = consultantIdGenerator.incrementAndGet();
@@ -43,7 +43,7 @@ public class ConsultantController {
         return consultant;
     }
 
-    @RequestMapping(value = "/consultant/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/consultants/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void delete(@PathVariable long id) {
         consultantRepository.remove(id);
