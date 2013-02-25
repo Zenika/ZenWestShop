@@ -1,8 +1,10 @@
 package org.zenika.skillz.web;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.hateoas.hal.Jackson1HalModule;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
@@ -24,6 +26,11 @@ public class DispatcherConfig extends WebMvcConfigurerAdapter {
         List<MediaType> mediatypes = new ArrayList<MediaType>();
         mediatypes.add(MediaType.APPLICATION_JSON);
         converter.setSupportedMediaTypes(mediatypes);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new Jackson1HalModule());
+
+        converter.setObjectMapper(objectMapper);
         converters.add(converter);
     }
 
