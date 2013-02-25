@@ -4,15 +4,15 @@
         <th>Profils</th>
         <th>Compétences</th>
     </tr>
-    <tr>
-        <td>Sébastien Brousse</td>
-        <td>Ragoteur</td>
+    <tr ng-repeat="consultant in consultants">
+        <td><a ng-click="goTo(consultant)">{{consultant.fullName}}</a></td>
+        <td>Responsable communication</td>
         <td>Montage de meuble en kit</td>
     </tr>
     <tr>
         <td>Alexandre Baron</td>
         <td>Bean gosse à mêche</td>
-        <td>50 m nage libre en 43'</td>
+        <td>50m nage libre en 43'</td>
     </tr>
     <tr>
         <td>Grégory Le Bonniec</td>

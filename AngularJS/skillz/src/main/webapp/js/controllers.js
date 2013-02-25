@@ -6,7 +6,17 @@
 function HomeCtrl() {}
 HomeCtrl.$inject = [];
 
-function CvCtrl($scope) {
+function CvsCtrl($rootScope, $scope, Cv, $location) {
+    $scope.consultants = Cv.query();
+
+    $scope.goTo = function(consultant) {
+        console.info("consultant : "+consultant._links.self.href)
+        $rootScope.link = consultant._links.self.href;
+        $location.path("/consultants/"+consultant.resourceId);
+    }
+};
+
+function CvCtrl($scope, $routeParams, Cv) {
     $scope.cv =
     {
         name: "Raphaël Delaporte",
@@ -64,5 +74,51 @@ function CvCtrl($scope) {
             }
         ]
     }
+
+    $scope.cv = Cv.get({cvId:$routeParams.consultantId});
+
+    $scope.consultants = Cv.query();
+
+    $scope.updateCv = function() {
+        if (this.wine.id > 0)
+            this.wine.$update({wineId:this.wine.id});
+        else
+            this.wine.$save();
+        window.location = "#/wines";
+
+
+
+    };
+
+
+
+//    function WineListCtrl(Wine) {
+//
+//        this.wines = Wine.query();
+//
+//    }
+
+//    function WineDetailCtrl(Wine) {
+//
+//        this.wine = Wine.get({wineId:this.params.wineId});
+//
+//
+//        this.saveWine = function () {
+//            if (this.wine.id > 0)
+//                this.wine.$update({wineId:this.wine.id});
+//            else
+//                this.wine.$save();
+//            window.location = "#/wines";
+//        }
+//
+//        this.deleteWine = function () {
+//            this.wine.$delete({wineId:this.wine.id}, function() {
+//                alert('Wine ' + wine.name + ' deleted')
+//                window.location = "#/wines";
+//            });
+//        }
+//
+//    }
+
 }
 CvCtrl.$inject = ['$scope'];
