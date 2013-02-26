@@ -11,9 +11,9 @@ skillzApp.config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/consultant/:id', {templateUrl: 'partials/consultant.html', controller: CvCtrl});
     $routeProvider.when('/editConsultant/:id', {templateUrl: 'partials/editConsultant.html', controller: CvCtrl});
     $routeProvider.when('/newConsultant', {templateUrl: 'partials/editConsultant.html', controller: newCvCtrl});
-    $routeProvider.otherwise({redirectTo : '/home'})
+    $routeProvider.otherwise({redirectTo : '/home'});
   }]);
 
-skillzApp.config('$locationProvider', function($locationProvider) {
+skillzApp.config(function($locationProvider) {
     $locationProvider.html5Mode(true);
 });
