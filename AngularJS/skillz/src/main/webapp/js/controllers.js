@@ -38,7 +38,7 @@ function CvsCtrl($rootScope, $scope, Cv, $location, $routeParams) {
         if ($scope.currentPage > 0) {
             $scope.currentPage--;
             console.info("--");
-            $location.path('/consultants').search('page='+$scope.currentPage);
+            $location.search('page',$scope.currentPage).path('/consultants');
         }
     }
 
@@ -46,14 +46,17 @@ function CvsCtrl($rootScope, $scope, Cv, $location, $routeParams) {
         if ($scope.currentPage < $scope.numberOfPages) {
             $scope.currentPage++;
             console.info("++");
-            $location.path('/consultants').search('page='+$scope.currentPage);
+            $location.search('page',$scope.currentPage).path('/consultants');
         }
     }
 
     $scope.setPage = function() {
         $scope.currentPage = this.n;
         console.info("setPage : "+$scope.currentPage);
-        $location.path('/consultants').search('page='+$scope.currentPage);
+        $location.search('page',$scope.currentPage)
+
+        console.info("setPage : "+$location.absUrl());
+        $location.search('page',$scope.currentPage).path('/consultants');
     }
 
     $scope.range = function (start, end) {

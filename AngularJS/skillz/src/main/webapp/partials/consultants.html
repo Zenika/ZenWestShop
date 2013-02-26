@@ -40,16 +40,16 @@
 <div class="row pagination pagination-centered">
     <ul>
         <li ng-class="{disabled: currentPage == 0}">
-            <a href="#" ng-click="prevPage()" >«</a>
+            <a ng-href="{{$location.path()}}" ng-click="prevPage()" >«</a>
         </li>
 
         <li ng-repeat="n in range(numberOfPages)"
             ng-class="{active: n == currentPage}"
             ng-click="setPage()">
-            <a href="#" ng-bind="n + 1">1</a>
+            <a ng-href="{{$location.path()}}" ng-bind="n + 1">1</a>
         </li>
         <li ng-class="{disabled: currentPage == pagedItems.length - 1}">
-            <a href="#" ng-click="nextPage()">»</a>
+            <a ng-href="{{$location.path()}}" ng-click="nextPage()">»</a>
         </li>
     </ul>
 </div>
