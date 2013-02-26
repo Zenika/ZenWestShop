@@ -2,15 +2,14 @@
 
 /* Directives */
 
-
-angular.module('myApp.directives', []).
-  directive('appVersion', ['version', function(version) {
+var skillzDirectives = angular.module('skillzApp.directives', []);
+skillzDirectives.directive('appVersion', ['version', function(version) {
     return function(scope, elm, attrs) {
       elm.text(version);
     };
   }]);
 
-angular.module('myApp.directives', []).directive('contenteditable', function() {
+skillzDirectives.directive('contenteditable', function() {
     return {
         require: 'ngModel',
         link: function(scope, elm, attrs, ctrl) {
