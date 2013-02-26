@@ -6,8 +6,8 @@
 function HomeCtrl() {}
 HomeCtrl.$inject = [];
 
-CvsCtrl.$inject = ['$rootScope', '$scope', 'Cv', '$location'];
-function CvsCtrl($rootScope, $scope, Cv, $location) {
+CvsCtrl.$inject = ['$rootScope', '$scope', 'Cv', '$location', '$routeParams'];
+function CvsCtrl($rootScope, $scope, Cv, $location, $routeParams) {
     $scope.consultants = Cv.query();
 
     $scope.goTo = function(consultant) {
@@ -21,6 +21,55 @@ function CvsCtrl($rootScope, $scope, Cv, $location) {
             $scope.consultants.splice(index, 1);
         });
     };
+
+    if ($routeParams.page == null) {
+        $scope.currentPage = 0;
+    } else {
+        $scope.currentPage = +$routeParams.page; //convert to int
+    }
+
+    if ($scope.currentPage < 0) {
+        $scope.currentPage = 0;
+    }
+
+    $scope.numberOfPages = 5;
+
+    $scope.prevPage = function() {
+        if ($scope.currentPage > 0) {
+            $scope.currentPage--;
+            console.info("--");
+            $location.path('/consultants').search('page='+$scope.currentPage);
+        }
+    }
+
+    $scope.nextPage = function() {
+        if ($scope.currentPage < $scope.numberOfPages) {
+            $scope.currentPage++;
+            console.info("++");
+            $location.path('/consultants').search('page='+$scope.currentPage);
+        }
+    }
+
+    $scope.setPage = function() {
+        $scope.currentPage = this.n;
+        console.info("setPage : "+$scope.currentPage);
+        $location.path('/consultants').search('page='+$scope.currentPage);
+    }
+
+    $scope.range = function (start, end) {
+        var ret = [];
+        if (!end) {
+            end = start;
+            start = 0;
+        }
+        for (var i = start; i < end; i++) {
+            ret.push(i);
+        }
+        return ret;
+    };
+
+
+
 };
 
 CvCtrl.$inject = ['$scope', '$routeParams', 'Cv', '$location'];
