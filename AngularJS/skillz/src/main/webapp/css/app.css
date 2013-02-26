@@ -28,3 +28,31 @@
   content: "";
   padding: 0;
 }
+
+/* Editable content */
+div[contentEditable] {
+    cursor: pointer;
+    background-color: white;
+    padding: .2em;
+}
+
+div[contentEditable]:focus {
+    cursor: pointer;
+    background-color: #D0D0D0;
+    border: 1px solid red;
+    padding: .2em;
+}
+
+div[contentEditable]:focus {
+    cursor: pointer;
+    background-color: #D0D0D0;
+    border: 1px solid red;
+    padding: .2em;
+}
+
+.skillz-edit {
+    padding: .2em;
+    border: 1px solid;
+    background-color: #D0D0D0;
+    font-size: 31.5px;
+}

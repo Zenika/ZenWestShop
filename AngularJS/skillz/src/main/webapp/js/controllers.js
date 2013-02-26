@@ -6,17 +6,25 @@
 function HomeCtrl() {}
 HomeCtrl.$inject = [];
 
+CvsCtrl.$inject = ['$rootScope', '$scope', 'Cv', '$location'];
 function CvsCtrl($rootScope, $scope, Cv, $location) {
     $scope.consultants = Cv.query();
 
     $scope.goTo = function(consultant) {
         console.info("consultant : "+consultant._links.self.href)
         $rootScope.link = consultant._links.self.href;
-        $location.path("/consultants/"+consultant.resourceId);
+        $location.path("/consultant/"+consultant.resourceId);
     }
+
+    $scope.deleteConsultant = function(index, consultant) {
+        Cv.delete({cvId:consultant.resourceId}, new function () {
+            $scope.consultants.splice(index, 1);
+        });
+    };
 };
 
-function CvCtrl($scope, $routeParams, Cv) {
+CvCtrl.$inject = ['$scope', '$routeParams', 'Cv', '$location'];
+function CvCtrl($scope, $routeParams, Cv, $location) {
     $scope.cv =
     {
         name: "Raphaël Delaporte",
@@ -75,50 +83,101 @@ function CvCtrl($scope, $routeParams, Cv) {
         ]
     }
 
-    $scope.cv = Cv.get({cvId:$routeParams.consultantId});
-
-    $scope.consultants = Cv.query();
+    $scope.cv = Cv.get({cvId:$routeParams.id});
 
     $scope.updateCv = function() {
-        if (this.wine.id > 0)
-            this.wine.$update({wineId:this.wine.id});
+        if (this.cv.resourceId > 0)
+            this.cv.$update({cvId:this.cv.resourceId});
         else
-            this.wine.$save();
-        window.location = "#/wines";
+            this.cv.$save();
 
-
-
+        $location.path('/consultant/'+this.cv.resourceId);
     };
 
 
+    if (!$scope.cv) {
+        cv.firstName = 'Prénom';
+        cv.lastName = 'Nom';
+    }
+}
 
-//    function WineListCtrl(Wine) {
-//
-//        this.wines = Wine.query();
-//
-//    }
+newCvCtrl.$inject = ['$scope', 'Cv', '$location'];
+function newCvCtrl($scope, Cv, $location) {
+    $scope.updateCv = function(cv) {
+        Cv.save(cv);
+        $location.path('/consultants');
+    };
 
-//    function WineDetailCtrl(Wine) {
-//
-//        this.wine = Wine.get({wineId:this.params.wineId});
-//
-//
-//        this.saveWine = function () {
-//            if (this.wine.id > 0)
-//                this.wine.$update({wineId:this.wine.id});
-//            else
-//                this.wine.$save();
-//            window.location = "#/wines";
-//        }
-//
-//        this.deleteWine = function () {
-//            this.wine.$delete({wineId:this.wine.id}, function() {
-//                alert('Wine ' + wine.name + ' deleted')
-//                window.location = "#/wines";
-//            });
-//        }
-//
-//    }
+    if ($scope.cv == null) {
+        $scope.cv = {
+            lastName: "Nom",
+            firstName: "Prénom",
+            title: "Titre",
+            subTitle: "Sous-titre",
+            exp: "6",
+            mail: "raphael.delaporte@zenika.com",
+            blog: "http://bpelsoa.blogspot.com"
+        }
+    }
 
 }
-CvCtrl.$inject = ['$scope'];
+
+FileUploadCtrl.$inject = ['$scope']
+function FileUploadCtrl($scope) {
+    $scope.setFiles = function(element) {
+        $scope.$apply(function($scope) {
+            console.log('files:', element.files);
+            // Turn the FileList object into an Array
+            $scope.files = []
+            for (var i = 0; i < element.files.length; i++) {
+                $scope.files.push(element.files[i])
+            }
+            $scope.progressVisible = false
+        });
+    };
+
+    $scope.uploadFile = function() {
+        var fd = new FormData()
+        for (var i in $scope.files) {
+            console.log($scope.files[i].name)
+            fd.append("file", $scope.files[i])
+        }
+        var xhr = new XMLHttpRequest()
+        xhr.upload.addEventListener("progress", uploadProgress, false)
+        xhr.addEventListener("load", uploadComplete, false)
+        xhr.addEventListener("error", uploadFailed, false)
+        xhr.addEventListener("abort", uploadCanceled, false)
+        xhr.open("POST", "services/fileupload")
+        $scope.progressVisible = true
+        xhr.send(fd)
+    }
+
+    function uploadProgress(evt) {
+        scope.$apply(function(){
+            if (evt.lengthComputable) {
+                scope.progress = Math.round(evt.loaded * 100 / evt.total)
+            } else {
+                scope.progress = 'unable to compute'
+            }
+        })
+    }
+
+    function uploadComplete(evt) {
+        /* This event is raised when the server send back a response */
+        console.log(evt.target.responseText);
+    }
+
+    function uploadFailed(evt) {
+        console.error("There was an error attempting to upload the file");
+    }
+
+    function uploadCanceled(evt) {
+        $scope.$apply(function(){
+            $scope.progressVisible = false
+        })
+        console.warn("The upload has been canceled by the user or the browser dropped the connection");
+    }
+}
+
+
+

@@ -1,0 +1,38 @@
+<form class="form-horizontal" name="cvForm" novalidate>
+    <div class="row">
+        <span class="offset11">
+            <a class="btn btn-large btn-primary" ng-click="updateCv(cv)"><i class="icon-pencil"></i> Update</a>
+        </span>
+    </div>
+    <div class="row" ng-controller="FileUploadCtrl">
+        <span class="span3 offset1">
+            <img src="img/default.jpg" class="img-polaroid">
+                <input type="file" id="fileToUpload" name="file" multiple onchange="angular.element(this).scope().setFiles(this)" />
+            </img>
+            <input type="button" ng-click="uploadFile()" value="Upload" />
+        </span>
+
+        <span class="span8">
+            <h2><input type="text" id="cvFirstName" class="skillz-edit input-large span4" ng-model="cv.firstName" ng-value="cv.firstName">&nbsp;<input type="text" id="cvLastName" class="skillz-edit input-large span3 " required ng-model="cv.lastName" ng-value="cv.lastName"></h2>
+            <h3><input type="text" id="cvTitle1" class="input-large skillz-edit" ng-model="cv.title" ng-value="cv.title"></h3>
+            <h3><input type="text" id="cvTitle2" class="input-large skillz-edit" ng-model="cv.subTitle" ng-value="cv.subTitle"></h3>
+        </span>
+    </div>
+    <div class="span12">
+        <h4>Profil</h4>
+        <table class="table">
+            <tr ng-repeat="profil in cv.profil">
+                <td>{{profil.title}}</td>
+                <td><p ng-repeat="desc in profil.desc">{{desc}}</p></td>
+            </tr>
+        </table>
+
+        <h4>Compétences</h4>
+        <table class="table">
+            <tr ng-repeat="competence in cv.competences">
+                <td>{{competence.title}}</td>
+                <td>{{competence.desc}}</td>
+            </tr>
+        </table>
+    </div>
+</form>

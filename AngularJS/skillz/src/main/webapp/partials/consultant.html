@@ -1,0 +1,38 @@
+<div class="row">
+    <span class="offset11">
+        <a class="btn btn-large" ng-href="#/editConsultant/{{cv.resourceId}}"><i class="icon-pencil"></i> Edit</a>
+    </span>
+</div>
+<div class="row">
+    <span class="span3 offset1">
+        <img src="img/default.jpg" class="img-polaroid" />
+    </span>
+    <span class="span8">
+        <h2>{{cv.firstName}}&nbsp;{{cv.lastName}}</h2>
+        <h3>{{cv.title}}</h3>
+        <h3>{{cv.subTitle}}</h3>
+        <p>{{cv.exp}} ans d'expérience</p>
+        <p>{{cv.mail}}</p>
+        <p>{{cv.blog}}</p>
+    </span>
+</div>
+
+<div class="span12">
+    <h4>Profil</h4>
+    <table class="table">
+        <tr ng-repeat="profil in cv.profil">
+            <td>{{profil.title}}</td>
+            <td>
+                <p ng-repeat="desc in profil.desc">{{desc}}</p>
+        </tr>
+    </table>
+
+    <h4>Compétences</h4>
+    <table class="table">
+        <tr ng-repeat="competence in cv.competences">
+            <td>{{competence.title}}</td>
+            <td>{{competence.desc}}</td>
+        </tr>
+    </table>
+
+</div>
