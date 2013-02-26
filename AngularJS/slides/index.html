@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>ZenWorkshop - AngularJS</title>
+
+		<meta name="description" content="Présentation du framework AngularJS">
+		<meta name="author" content="Alexandre Baron & Sébastien Brousse">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+					<h1>ZenWorkshop</h1>
+					<h3>AngularJS</h3>
+					<p>
+						<small>Alexandre Baron & Sébastien Brousse</small>
+					</p>
+				</section>
+
+				<section>
+					<h2>Heads Up</h2>
+					<p>
+						reveal.js is a framework for easily creating beautiful presentations using HTML. You'll need a browser with
+						support for CSS 3D transforms to see it in its full glory.
+					</p>
+
+					<aside class="notes">
+
+                        Présentation:
+                        - Framework MVC
+                        - Côté client
+                        - Javascript
+                        - Single Page Application
+                        - Pas de composants
+					</aside>
+				</section>
+
+					<section>
+						<h2>Vertical Slides</h2>
+						<p>
+							Slides can be nested inside of other slides,
+							try pressing <a href="#" class="navigate-down">down</a>.
+						</p>
+						<a href="#" class="image navigate-down">
+							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
+						</a>
+                        <aside class="notes">
+
+                            Fonctionnalités:
+                            - Etendre les balises HTML
+                            - Data-Binding bi-directionnel : lien entre modèle et vue (manipulation DOM découplé du code métier)
+                            - Injection de dépendances : utilisation de services dans les controlleurs
+                            - Facilite les tests unitaires
+                        </aside>
+					</section>
+					<section>
+						<h2>Basement Level 1</h2>
+						<p>Press down or up to navigate.</p>
+                        <aside class="notes">
+
+                            Fonctionnalités:
+                            - Etendre les balises HTML
+                            - Data-Binding bi-directionnel : lien entre modèle et vue (manipulation DOM découplé du code métier)
+                            - Injection de dépendances : utilisation de services dans les controlleurs
+                            - Facilite les tests unitaires
+                        </aside>
+					</section>
+					<section>
+						<h2>Basement Level 2</h2>
+						<p>Cornify</p>
+						<pre><code class="html">
+                            &lt;!doctype html&gt;
+                            &lt;html ng-app=&quot;myApp&quot;&gt;
+                            &lt;body&gt;
+                            &lt;div&gt;
+                                {{ 'Hello ' + 'World!' }}
+                            &lt;/div&gt;
+                            &lt;/body&gt;
+                            &lt;/html&gt;
+                        </code></pre>
+                        <aside class="notes">
+                            Module:
+                            - Déclaration d'une application : ng-app
+                            <!doctype html>
+                            <html ng-app="myApp">
+                            <body>
+                            <div>
+                                {{ 'Hello ' + 'World!' }}
+                            </div>
+                            </body>
+                            </html>
+                            => Hello World!
+                        </aside>
+                    </section>
+				<section>
+					<h2>Point of View</h2>
+					<p>
+						Press <strong>ESC</strong> to enter the slide overview. Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
+					</p>
+                    <pre><code class="html">
+                        &lt;div ng-controller=&quot;myCtrl&quot;&gt;
+                            &lt;input type=&quot;text&quot; ng-model=&quot;myVar&quot; ng-click=&quot;myFunc()&quot;/&gt;
+                            {{'Hello ' + myVar + '!'}}
+                        &lt;/div&gt;
+                    </code></pre>
+                    <aside class="notes">
+                        Controlleur:
+                        - Fournit le modèle : ng-controller <==> fonction javascript
+                        - Contient des données et aussi des fonctions
+                        - Fonction javascript met à jour le modèle dans le scope
+                        var myCtrl = function($scope) {
+                        $scope.myVar = " World;
+                        $scope.myFunc = function() {alert('Click!');}
+                        }
+                        - HTML
+                        <div ng-controller="myCtrl">
+                            <input type="text" ng-model="myVar" ng-click="myFunc()"/>
+                            {{'Hello ' + myVar + '!'}}
+                        </div>
+                    </aside>
+
+
+                </section>
+
+				<section>
+					<h2>rvl.io</h2>
+					<p>
+						If you don't like writing slides in HTML you can use the online editor <a href="http://www.rvl.io" target="_blank">rvl.io</a>.
+					</p>
+                    <aside class="notes">
+                        Directives:
+                        - Permet d'étendre les balises HTML. Exemple: ng-app, ng-model...
+                        - Permet de créer des composants
+                        .directive('myTag', function() { return {
+                        restrict: 'E', link : function(scope, element, attrs){
+                        element.html('<p>Hello</p>')
+                        }}});
+                        - HTML : <myTag/>
+                    </aside>
+				</section>
+
+				<section>
+					<h2>Works in Mobile Safari</h2>
+					<p>
+						Try it out! You can swipe through the slides and pinch your way to the overview.
+					</p>
+                    <aside class="notes">
+                        Services:
+                        - Singleton
+                        - Injection de dépendances
+                        - Service de base $http
+                        $http({method: 'GET', url: '/someUrl'}).
+                        success(function(data, status, headers, config) {
+                        // mise à jour du modèle
+                        }).
+                        error(function(data, status, headers, config) {
+                        // affichage de l'erreur
+                        });
+                    </aside>
+				</section>
+
+				<section>
+					<h2>Marvelous Unordered List</h2>
+					<ul>
+						<li>No order here</li>
+						<li>Or here</li>
+						<li>Or here</li>
+						<li>Or here</li>
+					</ul>
+                    <aside class="notes">
+                        Filters:
+                        - Mettre en forme : {{myVar | uppercase}}, {{myDate | date : 'dd/MM/yyyy'}}
+                        - Création : myApp.filter('inc', function() {return function(input, scope) {return input + 1;}}); => {{myNumber | inc}}
+                        - Répétitions:
+                        <li ng-repeat="item in myList | limitTo:5">{{item}}</li>
+                    </aside>
+				</section>
+
+				<section>
+					<h2>Fantastic Ordered List</h2>
+					<ol>
+						<li>One is smaller than...</li>
+						<li>Two is smaller than...</li>
+						<li>Three!</li>
+					</ol>
+                    <aside class="notes">
+                        Filters:
+                        - Mettre en forme : {{myVar | uppercase}}, {{myDate | date : 'dd/MM/yyyy'}}
+                        - Création : myApp.filter('inc', function() {return function(input, scope) {return input + 1;}}); => {{myNumber | inc}}
+                        - Répétitions:
+                        <li ng-repeat="item in myList | limitTo:5">{{item}}</li>
+                    </aside>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Markdown support
+
+						For those of you who like that sort of thing. Instructions and a bit more info available [here](https://github.com/hakimel/reveal.js#markdown).
+
+							<section data-markdown>
+							  ## Markdown support
+
+							  For those of you who like that sort of thing.
+							  Instructions and a bit more info available [here](https://github.com/hakimel/reveal.js#markdown).
+							</section>
+					</script>
+                    <aside class="notes">
+                        Assemblage:
+                        angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives']).
+                        angular.module('myApp.directives', []).directive('myTag', ...);
+                    </aside>
+				</section>
+
+				<section id="transitions">
+					<h2>Transition Styles</h2>
+					<p>
+						You can select from different transitions, like: <br>
+						<a href="?transition=cube#/transitions">Cube</a> -
+						<a href="?transition=page#/transitions">Page</a> -
+						<a href="?transition=concave#/transitions">Concave</a> -
+						<a href="?transition=zoom#/transitions">Zoom</a> -
+						<a href="?transition=linear#/transitions">Linear</a> -
+						<a href="?transition=fade#/transitions">Fade</a> -
+						<a href="?transition=none#/transitions">None</a> -
+						<a href="?#/transitions">Default</a>
+					</p>
+                    <aside class="notes">
+                        Routage
+                        - définir le routage SPA => attribut ng-view
+                        <div ng-view/>
+
+                        angular.module('myApp', []).config(['$routeProvider', function($routeProvider) {
+                        $routeProvider.when('/home', {templateUrl: 'home.html', controller: HomeCtrl});
+                        $routeProvider.when('/cv/{id}', {templateUrl: 'cv.html', controller: CvCtrl});
+                        $routeProvider.otherwise({redirectTo : '/home'})
+                        }]);
+
+                        <a href="#/cv/1">Link</a>
+                    </aside>
+
+				</section>
+
+				<section>
+					<h1>Questions ?</h1>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
