@@ -8,8 +8,7 @@
 var skillzServices = angular.module('skillzApp.services', ['ngResource']);
 skillzServices.value('version', '0.1');
 
-skillzServices.factory('Cv', function($resource){
-
+skillzServices.factory('Cv', function($resource) {
         return $resource('services/consultants/:cvId', {}, {
             query: {method:'GET', isArray:true},
             update: {method:'PUT'}

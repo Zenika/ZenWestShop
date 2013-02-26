@@ -14,6 +14,6 @@ skillzApp.config(['$routeProvider', function($routeProvider) {
     $routeProvider.otherwise({redirectTo : '/home'});
   }]);
 
-skillzApp.config(function($locationProvider) {
-    $locationProvider.html5Mode(true);
-});
+//skillzApp.config(function($locationProvider) {
+//    $locationProvider.html5Mode(true);
+//});
