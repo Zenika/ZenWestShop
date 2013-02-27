@@ -33,7 +33,7 @@ public class ConsultantController {
         Collection<Consultant> consultants = consultantRepository.find(page);
         int maxNumberOfConsultants = consultantRepository.getNumberOfConsultants();
         LOGGER.debug("Liste des consultants de la page {} : {}", page, consultants);
-        LOGGER.debug("Nombre max de consultants : {}", maxNumberOfConsultants);
+        LOGGER.trace("Nombre max de consultants : {}", maxNumberOfConsultants);
         ConsultantListResource consultantsResource = new ConsultantListResource();
         for (Consultant consultant : consultants) {
             consultantsResource.addConsultantResource(new ConsultantShortResource(consultant));
@@ -42,10 +42,9 @@ public class ConsultantController {
         // à mettre dans le repository..
         int numberOfPages = maxNumberOfConsultants / PageConstants.MAX_ELEMENT_A_PAGE;
         numberOfPages = (maxNumberOfConsultants % PageConstants.MAX_ELEMENT_A_PAGE == 0) ? numberOfPages : numberOfPages+1;
-        LOGGER.debug("maxNumberOfConsultants % PageConstants.MAX_ELEMENT_A_PAGE : {}", maxNumberOfConsultants % PageConstants.MAX_ELEMENT_A_PAGE);
         numberOfPages = (numberOfPages == 0) ? 1 : numberOfPages;
 
-        LOGGER.debug("Nombre de page : {}", numberOfPages);
+        LOGGER.trace("Nombre de page : {}", numberOfPages);
         consultantsResource.setNumberOfPages(numberOfPages);
 
         return consultantsResource;

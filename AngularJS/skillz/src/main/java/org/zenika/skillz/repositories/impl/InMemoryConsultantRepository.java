@@ -69,16 +69,16 @@ public class InMemoryConsultantRepository implements ConsultantRepository {
         List<Consultant> consultants = new ArrayList<Consultant>(consultantCollection);
         Collection<Consultant> pageOfConsultants = new ArrayList<Consultant>(MAX_ELEMENT_A_PAGE);
         int startElement = page * MAX_ELEMENT_A_PAGE;
-        LOGGER.debug("startElement : {}", startElement);
+        LOGGER.trace("startElement : {}", startElement);
         int maxNumberOfConsultant = consultantCollection.size();
-        LOGGER.debug("maxNumberOfConsultant : {}", maxNumberOfConsultant);
+        LOGGER.trace("maxNumberOfConsultant : {}", maxNumberOfConsultant);
         int counter = startElement <= maxNumberOfConsultant ? startElement : maxNumberOfConsultant - MAX_ELEMENT_A_PAGE;
-        LOGGER.debug("counter : {}", counter);
+        LOGGER.trace("counter : {}", counter);
         counter = counter <= 0 ? 0 : counter;
-        LOGGER.debug("counter < : {}", counter);
+        LOGGER.trace("counter < : {}", counter);
         while (counter < (startElement+MAX_ELEMENT_A_PAGE) && counter < maxNumberOfConsultant) {
             Consultant consultant = consultants.get(counter);
-            LOGGER.debug("Ajout du consultant {} dans la page", consultant.getId());
+            LOGGER.trace("Ajout du consultant {} dans la page", consultant.getId());
             pageOfConsultants.add(consultant);
             counter++;
         }
