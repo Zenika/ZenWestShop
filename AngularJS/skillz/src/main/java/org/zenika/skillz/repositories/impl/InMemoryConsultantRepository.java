@@ -14,13 +14,15 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.atomic.AtomicLong;
 
+import static org.zenika.skillz.model.PageConstants.MAX_ELEMENT_A_PAGE;
+
 @Repository
 public class InMemoryConsultantRepository implements ConsultantRepository {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(InMemoryConsultantRepository.class);
     private static final AtomicLong consultantIdGenerator = new AtomicLong(0);
     private static final Map<Long, Consultant> consultantRepository = new ConcurrentSkipListMap<Long, Consultant>();
-    private static final int MAX_ELEMENT_A_PAGE = 5;
+
 
     @PostConstruct
     public void initData() {
@@ -66,14 +68,26 @@ public class InMemoryConsultantRepository implements ConsultantRepository {
         Collection<Consultant> consultantCollection = consultantRepository.values();
         List<Consultant> consultants = new ArrayList<Consultant>(consultantCollection);
         Collection<Consultant> pageOfConsultants = new ArrayList<Consultant>(MAX_ELEMENT_A_PAGE);
-        int startElement = page*MAX_ELEMENT_A_PAGE;
+        int startElement = page * MAX_ELEMENT_A_PAGE;
+        LOGGER.debug("startElement : {}", startElement);
         int maxNumberOfConsultant = consultantCollection.size();
+        LOGGER.debug("maxNumberOfConsultant : {}", maxNumberOfConsultant);
         int counter = startElement <= maxNumberOfConsultant ? startElement : maxNumberOfConsultant - MAX_ELEMENT_A_PAGE;
-        while (counter < MAX_ELEMENT_A_PAGE && counter < maxNumberOfConsultant) {
-            pageOfConsultants.add(consultants.get(counter));
+        LOGGER.debug("counter : {}", counter);
+        counter = counter <= 0 ? 0 : counter;
+        LOGGER.debug("counter < : {}", counter);
+        while (counter < (startElement+MAX_ELEMENT_A_PAGE) && counter < maxNumberOfConsultant) {
+            Consultant consultant = consultants.get(counter);
+            LOGGER.debug("Ajout du consultant {} dans la page", consultant.getId());
+            pageOfConsultants.add(consultant);
             counter++;
         }
         return pageOfConsultants;
+    }
+
+    @Override
+    public int getNumberOfConsultants() {
+        return consultantRepository.size();
     }
 
 }

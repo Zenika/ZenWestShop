@@ -17,4 +17,6 @@ public interface ConsultantRepository {
     Consultant findById(long id);
 
     Collection<Consultant> find(int page);
+
+    int getNumberOfConsultants();
 }

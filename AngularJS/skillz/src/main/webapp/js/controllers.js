@@ -6,19 +6,22 @@
 function HomeCtrl() {}
 HomeCtrl.$inject = [];
 
-CvsCtrl.$inject = ['$rootScope', '$scope', 'Cv', '$location', '$routeParams'];
-function CvsCtrl($rootScope, $scope, Cv, $location, $routeParams) {
-    $scope.consultants = Cv.query();
+CvsCtrl.$inject = ['$scope', 'Cv', '$location', '$routeParams'];
+function CvsCtrl($scope, Cv, $location, $routeParams) {
+
+    if ($routeParams.page) {
+        $scope.consultantsList = Cv.get({page:$routeParams.page});
+    } else {
+        $scope.consultantsList = Cv.get();
+    }
 
     $scope.goTo = function(consultant) {
-        console.info("consultant : "+consultant._links.self.href)
-        $rootScope.link = consultant._links.self.href;
         $location.path("/consultant/"+consultant.resourceId);
     }
 
     $scope.deleteConsultant = function(index, consultant) {
         Cv.delete({cvId:consultant.resourceId}, new function () {
-            $scope.consultants.splice(index, 1);
+            $scope.consultantsList.consultants.splice(index, 1);
         });
     };
 
@@ -32,8 +35,6 @@ function CvsCtrl($rootScope, $scope, Cv, $location, $routeParams) {
         $scope.currentPage = 0;
     }
 
-    $scope.numberOfPages = 5;
-
     $scope.prevPage = function() {
         if ($scope.currentPage > 0) {
             $scope.currentPage--;
@@ -43,7 +44,7 @@ function CvsCtrl($rootScope, $scope, Cv, $location, $routeParams) {
     }
 
     $scope.nextPage = function() {
-        if ($scope.currentPage < $scope.numberOfPages) {
+        if ($scope.currentPage < $scope.consultantsList.numberOfPages) {
             $scope.currentPage++;
             console.info("++");
             $location.search('page',$scope.currentPage).path('/consultants');

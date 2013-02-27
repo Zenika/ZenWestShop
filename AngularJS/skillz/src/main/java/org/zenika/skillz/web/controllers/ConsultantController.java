@@ -7,12 +7,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.zenika.skillz.model.Consultant;
+import org.zenika.skillz.model.PageConstants;
 import org.zenika.skillz.repositories.ConsultantRepository;
 import org.zenika.skillz.web.pages.ConsultantListResource;
 import org.zenika.skillz.web.pages.ConsultantResource;
+import org.zenika.skillz.web.pages.ConsultantShortResource;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -26,14 +29,24 @@ public class ConsultantController {
     private ConsultantRepository consultantRepository;
 
     @RequestMapping(method = RequestMethod.GET)
-    public @ResponseBody List<ConsultantListResource> list(@RequestParam(value = "page", defaultValue = "0") int page) {
-        List<Consultant> consultants = new ArrayList<Consultant>(consultantRepository.find(page));
-        LOGGER.debug("Consultants : {}", consultants);
-        List<ConsultantListResource> consultantsResource = new ArrayList<ConsultantListResource>(consultants.size());
+    public @ResponseBody ConsultantListResource list(@RequestParam(defaultValue = "0") int page) {
+        Collection<Consultant> consultants = consultantRepository.find(page);
+        int maxNumberOfConsultants = consultantRepository.getNumberOfConsultants();
+        LOGGER.debug("Liste des consultants de la page {} : {}", page, consultants);
+        LOGGER.debug("Nombre max de consultants : {}", maxNumberOfConsultants);
+        ConsultantListResource consultantsResource = new ConsultantListResource();
         for (Consultant consultant : consultants) {
-            ConsultantListResource consultantResource = new ConsultantListResource(consultant);
-            consultantsResource.add(consultantResource);
+            consultantsResource.addConsultantResource(new ConsultantShortResource(consultant));
         }
+
+        // à mettre dans le repository..
+        int numberOfPages = maxNumberOfConsultants / PageConstants.MAX_ELEMENT_A_PAGE;
+        numberOfPages = (maxNumberOfConsultants % PageConstants.MAX_ELEMENT_A_PAGE == 0) ? numberOfPages : numberOfPages+1;
+        LOGGER.debug("maxNumberOfConsultants % PageConstants.MAX_ELEMENT_A_PAGE : {}", maxNumberOfConsultants % PageConstants.MAX_ELEMENT_A_PAGE);
+        numberOfPages = (numberOfPages == 0) ? 1 : numberOfPages;
+
+        LOGGER.debug("Nombre de page : {}", numberOfPages);
+        consultantsResource.setNumberOfPages(numberOfPages);
 
         return consultantsResource;
     }
@@ -47,19 +60,22 @@ public class ConsultantController {
     @ResponseStatus(HttpStatus.CREATED)
     public @ResponseBody ConsultantResource create(@RequestBody ConsultantResource consultantResource) {
         Consultant consultant = consultantRepository.create(consultantResource.asConsultant());
+        LOGGER.info("Ajout d'un consultant : {}", consultant);
         return new ConsultantResource(consultant);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.ACCEPTED)
     public @ResponseBody void update(@RequestBody ConsultantResource consultant) {
-        LOGGER.debug("Modification du Consultant : {}", consultant);
+        LOGGER.info("Modification du consultant : {}", consultant.getResourceId());
+        LOGGER.debug("Modifications: {}", consultant);
         consultantRepository.update(consultant.asConsultant());
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void delete(@PathVariable long id) {
+        LOGGER.info("Suppression du consultant : {}", id);
         consultantRepository.remove(id);
     }
 

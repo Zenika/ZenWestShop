@@ -1,54 +1,30 @@
 package org.zenika.skillz.web.pages;
 
-import org.springframework.hateoas.ResourceSupport;
-import org.zenika.skillz.model.Consultant;
-import org.zenika.skillz.web.controllers.ConsultantController;
+import java.util.ArrayList;
+import java.util.Collection;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+public class ConsultantListResource {
 
-public class ConsultantListResource extends ResourceSupport {
+    private Integer numberOfPages;
+    private Collection<ConsultantShortResource> consultants;
 
-    private Long resourceId;
-    private String fullName;
-    private String profil;
-    private String competence;
-
-    public ConsultantListResource(Consultant consultant) {
-        this.resourceId = consultant.getId();
-        this.fullName = consultant.getFullName();
-        add(linkTo(ConsultantController.class).slash(consultant.getId()).withSelfRel());
+    public ConsultantListResource() {
+        consultants = new ArrayList<ConsultantShortResource>();
     }
 
-    public Long getResourceId() {
-        return resourceId;
+    public void addConsultantResource(ConsultantShortResource consultantShortResource) {
+        consultants.add(consultantShortResource);
     }
 
-    public void setResourceId(Long resourceId) {
-        this.resourceId = resourceId;
+    public Collection<ConsultantShortResource> getConsultants() {
+        return consultants;
     }
 
-    public String getFullName() {
-        return fullName;
+    public Integer getNumberOfPages() {
+        return numberOfPages;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setNumberOfPages(Integer numberOfPages) {
+        this.numberOfPages = numberOfPages;
     }
-
-    public String getProfil() {
-        return profil;
-    }
-
-    public void setProfil(String profil) {
-        this.profil = profil;
-    }
-
-    public String getCompetence() {
-        return competence;
-    }
-
-    public void setCompetence(String competence) {
-        this.competence = competence;
-    }
-
 }
