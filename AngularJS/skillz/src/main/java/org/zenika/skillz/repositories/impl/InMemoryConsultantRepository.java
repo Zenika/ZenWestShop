@@ -7,7 +7,9 @@ import org.zenika.skillz.model.Consultant;
 import org.zenika.skillz.repositories.ConsultantRepository;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.atomic.AtomicLong;
@@ -18,9 +20,11 @@ public class InMemoryConsultantRepository implements ConsultantRepository {
     private static final Logger LOGGER = LoggerFactory.getLogger(InMemoryConsultantRepository.class);
     private static final AtomicLong consultantIdGenerator = new AtomicLong(0);
     private static final Map<Long, Consultant> consultantRepository = new ConcurrentSkipListMap<Long, Consultant>();
+    private static final int MAX_ELEMENT_A_PAGE = 5;
 
     @PostConstruct
     public void initData() {
+        LOGGER.info("Création du jeux de données...");
         Consultant consultant = new Consultant();
         consultant.setFirstName("Sébastien");
         consultant.setLastName("Brousse");
@@ -57,7 +61,19 @@ public class InMemoryConsultantRepository implements ConsultantRepository {
         return consultantRepository.get(id);
     }
 
-    static Map<Long, Consultant> getRepository() {
-        return consultantRepository;
+    @Override
+    public Collection<Consultant> find(int page) {
+        Collection<Consultant> consultantCollection = consultantRepository.values();
+        List<Consultant> consultants = new ArrayList<Consultant>(consultantCollection);
+        Collection<Consultant> pageOfConsultants = new ArrayList<Consultant>(MAX_ELEMENT_A_PAGE);
+        int startElement = page*MAX_ELEMENT_A_PAGE;
+        int maxNumberOfConsultant = consultantCollection.size();
+        int counter = startElement <= maxNumberOfConsultant ? startElement : maxNumberOfConsultant - MAX_ELEMENT_A_PAGE;
+        while (counter < MAX_ELEMENT_A_PAGE && counter < maxNumberOfConsultant) {
+            pageOfConsultants.add(consultants.get(counter));
+            counter++;
+        }
+        return pageOfConsultants;
     }
+
 }

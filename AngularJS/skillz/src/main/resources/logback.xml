@@ -8,6 +8,7 @@
   </appender>
   
   <logger name="org.zenika" level="DEBUG"/>
+  <logger name="ch.qos.logback" level="OFF"/>
   
 
   <root level="DEBUG">

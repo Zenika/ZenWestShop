@@ -15,4 +15,6 @@ public interface ConsultantRepository {
     void remove(long id);
 
     Consultant findById(long id);
+
+    Collection<Consultant> find(int page);
 }

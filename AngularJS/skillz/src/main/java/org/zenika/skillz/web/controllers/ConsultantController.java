@@ -26,15 +26,12 @@ public class ConsultantController {
     private ConsultantRepository consultantRepository;
 
     @RequestMapping(method = RequestMethod.GET)
-    public @ResponseBody List<ConsultantListResource> list() {
-        List<Consultant> consultants = new ArrayList<Consultant>(consultantRepository.findAll());
+    public @ResponseBody List<ConsultantListResource> list(@RequestParam(value = "page", defaultValue = "0") int page) {
+        List<Consultant> consultants = new ArrayList<Consultant>(consultantRepository.find(page));
         LOGGER.debug("Consultants : {}", consultants);
         List<ConsultantListResource> consultantsResource = new ArrayList<ConsultantListResource>(consultants.size());
         for (Consultant consultant : consultants) {
             ConsultantListResource consultantResource = new ConsultantListResource(consultant);
-//            Link detail = linkTo(ConsultantController.class).slash(consultant.getId()).withSelfRel();
-//            consultantResource.addLIn(detail);
-
             consultantsResource.add(consultantResource);
         }
 
