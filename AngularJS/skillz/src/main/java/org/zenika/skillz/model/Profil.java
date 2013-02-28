@@ -2,10 +2,6 @@ package org.zenika.skillz.model;
 
 public class Profil {
 
-    private enum TYPE {
-        CONFERENCIER,ARCHITECTE,CONSULTANT
-    }
-
     private String title;
     private String description;
 

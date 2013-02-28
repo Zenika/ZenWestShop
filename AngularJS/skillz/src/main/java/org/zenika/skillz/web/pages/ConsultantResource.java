@@ -5,8 +5,7 @@ import org.zenika.skillz.model.Consultant;
 public class ConsultantResource {
 
     private Long resourceId;
-    private String profil;
-    private String competence;
+
     private String lastName;
     private String firstName;
     private String mail;

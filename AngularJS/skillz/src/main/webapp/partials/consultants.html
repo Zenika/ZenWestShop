@@ -6,31 +6,37 @@
 <div class="row">
     <table class="table table-striped table-bordered">
         <tr>
-            <th>Nom</th>
+            <th><a href="" ng-click="predicate = 'consultantsList.consultants.fullName'; reverse=!reverse">Nom</a></th>
             <th>Profils</th>
             <th>Compétences</th>
             <th>&nbsp;</th>
         </tr>
-        <tr ng-repeat="consultant in consultantsList.consultants">
+        <tr ng-repeat="consultant in consultantsList.consultants | orderBy:predicate:reverse">
             <td><a ng-click="goTo(consultant)">{{consultant.fullName}}</a></td>
-            <td>Responsable communication</td>
+            <td>{{consultant.profils}}</td>
             <td>Montage de meuble en kit</td>
             <td><a class="btn btn-mini" ng-click="deleteConsultant($index, consultant)"><i class="icon-minus"></i></a></td>
         </tr>
         <tr>
-            <td>Alexandre Baron</td>
+            <td><a>Sébastien Brousse</a></td>
+            <td>Responsable communication</td>
+            <td>Montage de meuble en kit</td>
+            <td><a class="btn btn-mini"><i class="icon-minus"></i></a></td>
+        </tr>
+        <tr>
+            <td><a>Alexandre Baron</a></td>
             <td>Bean gosse à mêche</td>
             <td>50m nage libre en 43'</td>
             <td><a class="btn btn-mini" href="#"><i class="icon-minus"></i></a></td>
         </tr>
         <tr>
-            <td>Grégory Le Bonniec</td>
+            <td><a>Grégory Le Bonniec</a></td>
             <td>Français libre</td>
             <td>Apprécie l'art moderne</td>
             <td><a class="btn btn-mini" href="#"><i class="icon-minus"></i></a></td>
         </tr>
         <tr>
-            <td>Raphaël Delaporte</td>
+            <td><a>Raphaël Delaporte</a></td>
             <td>Eleveur de canard</td>
             <td>Coin-coin</td>
             <td><a class="btn btn-mini" href="#"><i class="icon-minus"></i></a></td>
@@ -42,7 +48,6 @@
         <li ng-class="{disabled: currentPage == 0}">
             <a ng-href="{{$location.path()}}" ng-click="prevPage()" >«</a>
         </li>
-
         <li ng-repeat="n in range(consultantsList.numberOfPages)"
             ng-class="{active: n == currentPage}"
             ng-click="setPage()">

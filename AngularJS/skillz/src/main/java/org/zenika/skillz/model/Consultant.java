@@ -47,8 +47,7 @@ public class Consultant implements Serializable {
     private String subTitle;
     private Integer experienceLength;
     private Set<Competence> competences;
-
-    private Profil profil;
+    private Set<Profil> profils;
 
 
     public void setId(Long id) {
@@ -75,16 +74,70 @@ public class Consultant implements Serializable {
         this.firstName = firstName;
     }
 
+    public String getFullName() {
+        return firstName+" "+lastName;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getSubTitle() {
+        return subTitle;
+    }
+
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle;
+    }
+
+    public Integer getExperienceLength() {
+        return experienceLength;
+    }
+
+    public void setExperienceLength(Integer experienceLength) {
+        this.experienceLength = experienceLength;
+    }
+
+    public Set<Competence> getCompetences() {
+        return competences;
+    }
+
+    public void setCompetences(Set<Competence> competences) {
+        this.competences = competences;
+    }
+
+    public Set<Profil> getProfils() {
+        return profils;
+    }
+
+    public void setProfils(Set<Profil> profils) {
+        this.profils = profils;
+    }
+
     @Override
     public String toString() {
         return "Consultant{" +
                 "id=" + id +
                 ", lastName='" + lastName + '\'' +
                 ", firstName='" + firstName + '\'' +
+                ", mail='" + mail + '\'' +
+                ", title='" + title + '\'' +
+                ", subTitle='" + subTitle + '\'' +
+                ", experienceLength=" + experienceLength +
+                ", competences=" + competences +
+                ", profils=" + profils +
                 '}';
-    }
-
-    public String getFullName() {
-        return firstName+" "+lastName;
     }
 }

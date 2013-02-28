@@ -15,6 +15,8 @@ import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 import static org.zenika.skillz.model.PageConstants.MAX_ELEMENT_A_PAGE;
+import static org.zenika.skillz.model.builders.ConsultantBuilder.aConsultant;
+import static org.zenika.skillz.model.builders.ProfilBuilder.aProfil;
 
 @Repository
 public class InMemoryConsultantRepository implements ConsultantRepository {
@@ -27,9 +29,44 @@ public class InMemoryConsultantRepository implements ConsultantRepository {
     @PostConstruct
     public void initData() {
         LOGGER.info("Création du jeux de données...");
-        Consultant consultant = new Consultant();
-        consultant.setFirstName("Sébastien");
-        consultant.setLastName("Brousse");
+        Consultant consultant = aConsultant().withFirstName("Sébastien")
+                                             .withLastName("Brousse")
+                                             .withExperienceLength(6)
+                                             .withMail("sebastien.brousse@zenika.com")
+                                             .withProfils(aProfil().withTitle("Architecte").withDescription("Mise en place d'architecture SOA").build(),
+                                                     aProfil().withTitle("Consultant").withDescription("Expertise SOA\n" +
+                                                             "Mise en place de forge logicielle").build(),
+                                                     aProfil().withTitle("Formateur").withDescription("Intégration continue\n" +
+                                                             "Tester ses Web Services avec SoapUI Pro\n" +
+                                                             "ESB\n" +
+                                                             "Web Services\n" +
+                                                             "GWT\n" +
+                                                             "Git\n" +
+                                                             "Architecture RESTful").build())
+                                             .build();
+        create(consultant);
+
+        consultant = aConsultant().withFirstName("Alexandre")
+                .withLastName("Baron")
+                .withExperienceLength(6)
+                .withMail("alexandre.baron@zenika.com")
+                .withProfils(aProfil().withTitle("Architecte").withDescription("Conception technique et réalisation de plusieurs applications télécom JEE multi-tiers").build(),
+                        aProfil().withTitle("Consultant").withDescription("Expertise Java/JEE dans le domaine télécom").build())
+                .build();
+
+        create(consultant);
+
+        consultant = aConsultant().withFirstName("Martin")
+                .withLastName("Mouterde")
+                .withExperienceLength(4)
+                .withMail("martin.mouterde@zenika.com")
+                .withProfils(aProfil().withTitle("Consultant").withDescription("Expertise Java/JEE et Flex sur un projet télécom\n" +
+                        "Expertise Agilité Scrum/Kanban, certifié Scrum Master").build(),
+                        aProfil().withTitle("Architecte").withDescription("Conception d'une application de manipulation de gros volume de données dans le domaine des télécoms.\n" +
+                                "Refonte de l'architecture d'un projet avec un objectif de performance fort").build(),
+                        aProfil().withTitle("Formateur").withDescription("Java – Flex").build())
+                .build();
+
         create(consultant);
     }
 
