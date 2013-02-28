@@ -1,10 +1,11 @@
 package org.zenika.skillz.web.pages;
 
 import com.google.common.base.Objects;
+import org.zenika.skillz.model.Competence;
 import org.zenika.skillz.model.Consultant;
 import org.zenika.skillz.model.Profil;
 
-import java.util.Set;
+import java.util.List;
 
 public class ConsultantResource {
 
@@ -17,7 +18,8 @@ public class ConsultantResource {
     private String subTitle;
     private Integer exp;
     private String blog;
-    private Set<Profil> profils;
+    private List<Profil> profils;
+    private List<Competence> competences;
 
     public ConsultantResource() {
     }
@@ -26,8 +28,12 @@ public class ConsultantResource {
         this.resourceId = consultant.getId();
         this.lastName = consultant.getLastName();
         this.firstName = consultant.getFirstName();
+        this.title = consultant.getTitle();
+        this.subTitle = consultant.getSubTitle();
         this.exp = consultant.getExperienceLength();
+        this.mail = consultant.getMail();
         this.profils = consultant.getProfils();
+        this.competences = consultant.getCompetences();
     }
 
     public Long getResourceId() {
@@ -94,12 +100,20 @@ public class ConsultantResource {
         this.blog = blog;
     }
 
-    public Set<Profil> getProfils() {
+    public List<Profil> getProfils() {
         return profils;
     }
 
-    public void setProfils(Set<Profil> profils) {
+    public void setProfils(List<Profil> profils) {
         this.profils = profils;
+    }
+
+    public List<Competence> getCompetences() {
+        return competences;
+    }
+
+    public void setCompetences(List<Competence> competences) {
+        this.competences = competences;
     }
 
     public Consultant asConsultant() {
@@ -107,7 +121,11 @@ public class ConsultantResource {
         consultant.setId(this.resourceId);
         consultant.setFirstName(this.firstName);
         consultant.setLastName(this.lastName);
+        consultant.setMail(this.mail);
+        consultant.setTitle(this.title);
+        consultant.setSubTitle(this.subTitle);
         consultant.setProfils(this.profils);
+        consultant.setCompetences(this.competences);
         return consultant;
     }
 
@@ -123,6 +141,7 @@ public class ConsultantResource {
                 .add("exp", exp)
                 .add("blog", blog)
                 .add("profils", profils)
+                .add("competences", competences)
                 .toString();
     }
 }

@@ -1,7 +1,7 @@
 package org.zenika.skillz.model;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 public class Consultant implements Serializable {
 
@@ -46,8 +46,8 @@ public class Consultant implements Serializable {
     private String title;
     private String subTitle;
     private Integer experienceLength;
-    private Set<Competence> competences;
-    private Set<Profil> profils;
+    private List<Competence> competences;
+    private List<Profil> profils;
 
 
     public void setId(Long id) {
@@ -110,19 +110,19 @@ public class Consultant implements Serializable {
         this.experienceLength = experienceLength;
     }
 
-    public Set<Competence> getCompetences() {
+    public List<Competence> getCompetences() {
         return competences;
     }
 
-    public void setCompetences(Set<Competence> competences) {
+    public void setCompetences(List<Competence> competences) {
         this.competences = competences;
     }
 
-    public Set<Profil> getProfils() {
+    public List<Profil> getProfils() {
         return profils;
     }
 
-    public void setProfils(Set<Profil> profils) {
+    public void setProfils(List<Profil> profils) {
         this.profils = profils;
     }
 

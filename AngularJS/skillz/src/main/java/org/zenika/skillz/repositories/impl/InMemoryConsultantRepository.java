@@ -15,6 +15,7 @@ import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 import static org.zenika.skillz.model.PageConstants.MAX_ELEMENT_A_PAGE;
+import static org.zenika.skillz.model.builders.CompetenceBuilder.aCompetence;
 import static org.zenika.skillz.model.builders.ConsultantBuilder.aConsultant;
 import static org.zenika.skillz.model.builders.ProfilBuilder.aProfil;
 
@@ -43,6 +44,13 @@ public class InMemoryConsultantRepository implements ConsultantRepository {
                                                              "GWT\n" +
                                                              "Git\n" +
                                                              "Architecture RESTful").build())
+                                             .withCompetences(aCompetence().withCategorie("Java").withDetailedCompetences("Jav - Eclipse - IntelliJ - Spring").build(),
+                                                     aCompetence().withCategorie("Web").withDetailedCompetences("AngularJS - GWT - Wicket - Struts2 - JSP/Servlet - HTML - CSS").build(),
+                                                     aCompetence().withCategorie("Persistance").withDetailedCompetences("Hibernate - JPA - JDBC").build(),
+                                                     aCompetence().withCategorie("SOA/Intégration").withDetailedCompetences("Camel - Web Services (WS-* - JAX-WS/CXF) - JMS - Spring Batch").build(),
+                                                     aCompetence().withCategorie("Serveurs d'applications").withDetailedCompetences("ServiceMix (Fuse ESB 4) - Tomcat 7 - Jetty - Weblogic 10.3 (Oracle SOA Suite)").build(),
+                                                     aCompetence().withCategorie("MOM").withDetailedCompetences("ActiveMQ").build(),
+                                                     aCompetence().withCategorie("Production logicielle").withDetailedCompetences("Maven - Ant/Ivy - Jenkins/Hudson - Sonar - Nexus - Git - SVN - CVS").build())
                                              .build();
         create(consultant);
 
@@ -52,6 +60,11 @@ public class InMemoryConsultantRepository implements ConsultantRepository {
                 .withMail("alexandre.baron@zenika.com")
                 .withProfils(aProfil().withTitle("Architecte").withDescription("Conception technique et réalisation de plusieurs applications télécom JEE multi-tiers").build(),
                         aProfil().withTitle("Consultant").withDescription("Expertise Java/JEE dans le domaine télécom").build())
+                .withCompetences(aCompetence().withCategorie("Java").withDetailedCompetences("Java - Eclipse - Spring").build(),
+                        aCompetence().withCategorie("Web").withDetailedCompetences("GWT - JSP/Servlet - Struts - HTML - CSS").build(),
+                        aCompetence().withCategorie("Persistance").withDetailedCompetences("Hibernate - JPA - JDBC").build(),
+                        aCompetence().withCategorie("SOA/Intégration").withDetailedCompetences("Web Services (WS-* - JAX-WS/CXF) - JMS - Spring Batch").build(),
+                        aCompetence().withCategorie("MOM").withDetailedCompetences("Websphere MQ").build())
                 .build();
 
         create(consultant);
@@ -65,6 +78,11 @@ public class InMemoryConsultantRepository implements ConsultantRepository {
                         aProfil().withTitle("Architecte").withDescription("Conception d'une application de manipulation de gros volume de données dans le domaine des télécoms.\n" +
                                 "Refonte de l'architecture d'un projet avec un objectif de performance fort").build(),
                         aProfil().withTitle("Formateur").withDescription("Java – Flex").build())
+                .withCompetences(aCompetence().withCategorie("Java").withDetailedCompetences("Java - Eclipse - Spring - Swing - Groovy - OSGi").build(),
+                        aCompetence().withCategorie("Web").withDetailedCompetences("Flex - Struts - JSP/Servlet - PHP").build(),
+                        aCompetence().withCategorie("Persistance").withDetailedCompetences("Hibernate - JPA - JDBC").build(),
+                        aCompetence().withCategorie("Serveurs d'applications").withDetailedCompetences("Tomcat 5/6 - Jetty").build(),
+                        aCompetence().withCategorie("Production logicielle").withDetailedCompetences("Maven - Ant - Jenkins/Hudson - Sonar - SVN").build())
                 .build();
 
         create(consultant);

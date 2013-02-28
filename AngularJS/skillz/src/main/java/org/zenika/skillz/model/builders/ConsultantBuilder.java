@@ -4,9 +4,9 @@ import org.zenika.skillz.model.Competence;
 import org.zenika.skillz.model.Consultant;
 import org.zenika.skillz.model.Profil;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 public class ConsultantBuilder {
     private Long id;
@@ -16,8 +16,8 @@ public class ConsultantBuilder {
     private String title;
     private String subTitle;
     private Integer experienceLength;
-    private Set<Competence> competences;
-    private Set<Profil> profils = new HashSet<Profil>();
+    private List<Competence> competences;
+    private List<Profil> profils = new ArrayList<Profil>();
 
     private ConsultantBuilder() {
     }
@@ -61,13 +61,13 @@ public class ConsultantBuilder {
         return this;
     }
 
-    public ConsultantBuilder withCompetences(Set<Competence> competences) {
-        this.competences = competences;
+    public ConsultantBuilder withCompetences(Competence... competences) {
+        this.competences = Arrays.asList(competences);;
         return this;
     }
 
     public ConsultantBuilder withProfils(Profil... profils) {
-        this.profils = new HashSet<Profil>(Arrays.asList(profils));
+        this.profils = Arrays.asList(profils);
         return this;
     }
 

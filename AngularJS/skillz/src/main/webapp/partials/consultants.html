@@ -14,7 +14,7 @@
         <tr ng-repeat="consultant in consultantsList.consultants | orderBy:predicate:reverse">
             <td><a ng-click="goTo(consultant)">{{consultant.fullName}}</a></td>
             <td>{{consultant.profils}}</td>
-            <td>Montage de meuble en kit</td>
+            <td>{{consultant.competences}}</td>
             <td><a class="btn btn-mini" ng-click="deleteConsultant($index, consultant)"><i class="icon-minus"></i></a></td>
         </tr>
         <tr>
