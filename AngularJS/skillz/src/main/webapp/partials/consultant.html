@@ -1,37 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Skillz</title>
+
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico" />
+    <link href="../css/app.css" rel="stylesheet" media="screen"/>
+    <link href="../css/bootstrap.css" rel="stylesheet" media="screen"/>
+    <script src="../js/jquery-1.9.1.min.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <style>
+        body {
+            padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+        }
+    </style>
+</head>
+
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="#">Skillz</a>
+
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li><a id="homeMenu" href="../index.html">Home</a></li>
+                    <li><a id="consultantsMenu" href="../partials/consultants.html">Consultants</a></li>
+                </ul>
+
+                <form class="navbar-search pull-right" action="" onsubmit="return false">
+                    <input class="search-query span2" placeholder="Search" type="text">
+                </form>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
+
+<div class="container">
+<!-- remove up -->
+
+
 <div class="row">
     <span class="offset11">
-        <a class="btn btn-large" ng-href="#/editConsultant/{{cv.resourceId}}"><i class="icon-pencil"></i> Edit</a>
+        <a class="btn btn-large" href="../partials/editConsultant.html"><i class="icon-pencil"></i> Edit</a>
     </span>
 </div>
 <div class="row">
     <span class="span3 offset1">
-        <img src="img/default.jpg" class="img-polaroid" />
+        <img src="../img/consultants/rdelaporte.JPG" class="img-polaroid" />
     </span>
     <span class="span8">
-        <h2>{{cv.firstName}}&nbsp;{{cv.lastName}}</h2>
-        <h3>{{cv.title}}</h3>
-        <h3>{{cv.subTitle}}</h3>
-        <p>{{cv.exp}} ans d'expérience</p>
-        <p>{{cv.mail}}</p>
-        <p>{{cv.blog}}</p>
+        <h2>Raphaël Delaporte</h2>
+        <h3>Consultant Java/ JEE / SOA / Messaging</h3>
+        <h3>Directeur Technique Zenika Ouest</h3>
+        <p>6 ans d'expérience</p>
+        <p>raphael.delaporte@zenika.com</p>
+        <p>http://bpelsoa.blogspot.com</p>
     </span>
 </div>
 
 <div class="span12">
     <h4>Profil</h4>
     <table class="table">
-        <tr ng-repeat="profil in cv.profils">
-            <td>{{profil.title}}</td>
-            <td><p ng-bind-html="profil.description | newlines"></p></td>
+        <tr>
+            <td>Consultant</td>
+            <td><p>Expertise SOA sur des projets télécoms en contexte offshore (Inde)<br />
+                Expertise prototypage de solution de messaging (AMQP / JMS)<br />
+                Expertise Java embarqué – Exécution de JVM sur microcontrôleurs STM</p></td>
+        </tr>
+        <tr>
+            <td>Architecte</td>
+            <td><p>Expertise SOA sur des projets télécoms en contexte offshore (Inde)<br />
+                Expertise prototypage de solution de messaging (AMQP / JMS)<br />
+                Expertise Java embarqué – Exécution de JVM sur microcontrôleurs STM</p></td>
+        </tr>
+        <tr>
+            <td>Formateur</td>
+            <td><p>SOA – BPEL – AMQP – JMS – ESB – Java – Web Services – RabbitMQ</p></td>
         </tr>
     </table>
 
     <h4>Compétences</h4>
     <table class="table">
-        <tr ng-repeat="competence in cv.competences">
-            <td>{{competence.categorie}}</td>
-            <td><p>{{competence.detailedCompetences}}</p></td>
+        <tr>
+            <td>Java</td>
+            <td><p>Java – Java EE – Spring Framework – Java ME – CLDC – AOP</p></td>
+        </tr>
+        <tr>
+            <td>Tuning</td>
+            <td><p>VisualGC – Jconsole – JVMStat – Samurai – Yourkit Java Profiler – Jprofiler</p></td>
+        </tr>
+        <tr>
+            <td>Persistance</td>
+            <td><p>Hibernate – JPA – MyBatis – JDBC</p></td>
         </tr>
     </table>
-
 </div>
+<!-- remove below -->
+</div>
+</body>
+</html>

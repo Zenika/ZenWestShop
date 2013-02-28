@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="skillzApp">
+<html>
 <head>
     <title>Skillz</title>
 
@@ -9,14 +9,6 @@
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
     <link href="css/app.css" rel="stylesheet" media="screen"/>
     <link href="css/bootstrap.css" rel="stylesheet" media="screen"/>
-    <script src="js/lib/angular/angular.js"></script>
-    <script src="js/lib/angular/angular-resource.min.js"></script>
-    <script src="js/lib/angular/angular-sanitize.min.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/services.js"></script>
-    <script src="js/controllers.js"></script>
-    <script src="js/filters.js"></script>
-    <script src="js/directives.js"></script>
     <script src="js/jquery-1.9.1.min.js"></script>
     <script src="js/bootstrap.js"></script>
     <style>
@@ -39,9 +31,8 @@
 
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <li><a id="homeMenu" href="#">Home</a></li>
-                    <li><a id="exampleMenu" href="#/example">Example</a></li>
-                    <li><a id="consultantsMenu" href="#/consultants">Consultants</a></li>
+                    <li><a id="homeMenu" href="index.html">Home</a></li>
+                    <li><a id="consultantsMenu" href="partials/consultants.html">Consultants</a></li>
                 </ul>
 
                 <form class="navbar-search pull-right" action="" onsubmit="return false">
@@ -53,7 +44,11 @@
     </div>
 </div>
 
-<div ng-view id="homeContainer" class="container">
+<div class="container">
+
+    <h1>Zen West Shop AngularJS</h1>
+    <p>Search, find CVs.</p>
+
 </div>
 </body>
 </html>
