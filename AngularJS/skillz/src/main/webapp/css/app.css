@@ -56,3 +56,12 @@ div[contentEditable]:focus {
     background-color: #D0D0D0;
     font-size: 31.5px;
 }
+
+.row > div {
+    margin: 10px;
+}
+
+textarea {
+    height: 150px;
+}
+

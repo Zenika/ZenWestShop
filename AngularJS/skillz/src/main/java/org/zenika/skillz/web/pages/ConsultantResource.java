@@ -1,6 +1,10 @@
 package org.zenika.skillz.web.pages;
 
+import com.google.common.base.Objects;
 import org.zenika.skillz.model.Consultant;
+import org.zenika.skillz.model.Profil;
+
+import java.util.Set;
 
 public class ConsultantResource {
 
@@ -13,6 +17,7 @@ public class ConsultantResource {
     private String subTitle;
     private Integer exp;
     private String blog;
+    private Set<Profil> profils;
 
     public ConsultantResource() {
     }
@@ -21,7 +26,8 @@ public class ConsultantResource {
         this.resourceId = consultant.getId();
         this.lastName = consultant.getLastName();
         this.firstName = consultant.getFirstName();
-//        add(linkTo(ConsultantController.class).slash(consultant.getId()).withSelfRel());
+        this.exp = consultant.getExperienceLength();
+        this.profils = consultant.getProfils();
     }
 
     public Long getResourceId() {
@@ -88,11 +94,35 @@ public class ConsultantResource {
         this.blog = blog;
     }
 
+    public Set<Profil> getProfils() {
+        return profils;
+    }
+
+    public void setProfils(Set<Profil> profils) {
+        this.profils = profils;
+    }
+
     public Consultant asConsultant() {
         Consultant consultant = new Consultant();
         consultant.setId(this.resourceId);
         consultant.setFirstName(this.firstName);
         consultant.setLastName(this.lastName);
+        consultant.setProfils(this.profils);
         return consultant;
+    }
+
+    @Override
+    public String toString() {
+        return Objects.toStringHelper(this)
+                .add("resourceId", resourceId)
+                .add("lastName", lastName)
+                .add("firstName", firstName)
+                .add("mail", mail)
+                .add("title", title)
+                .add("subTitle", subTitle)
+                .add("exp", exp)
+                .add("blog", blog)
+                .add("profils", profils)
+                .toString();
     }
 }

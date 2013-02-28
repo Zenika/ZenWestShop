@@ -1,5 +1,7 @@
 package org.zenika.skillz.model;
 
+import com.google.common.base.Objects;
+
 public class Profil {
 
     private String title;
@@ -23,9 +25,9 @@ public class Profil {
 
     @Override
     public String toString() {
-        return "Profil{" +
-                "title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+        return Objects.toStringHelper(this)
+                .add("title", title)
+                .add("description", description)
+                .toString();
     }
 }

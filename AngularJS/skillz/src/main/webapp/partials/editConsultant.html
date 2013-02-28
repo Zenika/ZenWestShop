@@ -13,19 +13,23 @@
         </span>
 
         <span class="span8">
-            <h2><input type="text" id="cvFirstName" class="skillz-edit input-large span4" ng-model="cv.firstName" ng-value="cv.firstName">&nbsp;<input type="text" id="cvLastName" class="skillz-edit input-large span3 " required ng-model="cv.lastName" ng-value="cv.lastName"></h2>
-            <h3><input type="text" id="cvTitle1" class="input-large skillz-edit" ng-model="cv.title" ng-value="cv.title"></h3>
-            <h3><input type="text" id="cvTitle2" class="input-large skillz-edit" ng-model="cv.subTitle" ng-value="cv.subTitle"></h3>
+            <h2><input type="text" id="cvFirstName" class="skillz-edit input-large span4" ng-model="cv.firstName" ng-value="cv.firstName"/>&nbsp;<input type="text" id="cvLastName" class="skillz-edit input-large span3 " required ng-model="cv.lastName" ng-value="cv.lastName"/></h2>
+            <h3><input type="text" id="cvTitle1" class="input-large skillz-edit" ng-model="cv.title" ng-value="cv.title"/></h3>
+            <h3><input type="text" id="cvTitle2" class="input-large skillz-edit" ng-model="cv.subTitle" ng-value="cv.subTitle"/></h3>
+            <h3><input type="text" id="cvExp" class="input-large skillz-edit" ng-model="cv.exp" ng-value="cv.exp"/>&nbps;Année d'expérience</h3>
+            <h3><input type="text" id="cvMail" class="input-large skillz-edit" ng-model="cv.mail" ng-value="cv.mail"/></h3>
         </span>
     </div>
     <div class="span12">
         <h4>Profil</h4>
-        <table class="table">
-            <tr ng-repeat="profil in cv.profil">
-                <td>{{profil.title}}</td>
-                <td><p ng-repeat="desc in profil.desc">{{desc}}</p></td>
-            </tr>
-        </table>
+        <div class="row" ng-repeat="profil in cv.profils">
+            <div class="row">
+                <input type="text" class="input-large skillz-edit" ng-model="profil.title" ng-value="profil.title"/>
+            </div>
+            <div class="row">
+                <textarea rows="5" class="input-medium span12" ng-model="profil.description" ng-value="profil.description"/>
+            </div>
+        </div>
 
         <h4>Compétences</h4>
         <table class="table">

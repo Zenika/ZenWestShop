@@ -149,8 +149,24 @@ function CvCtrl($scope, $routeParams, Cv, $location) {
 
 
     if (!$scope.cv) {
-        cv.firstName = 'Prénom';
-        cv.lastName = 'Nom';
+        $scope.cv = {
+            firstName: 'Prénom',
+            lastName: 'Nom',
+            exp: '1',
+            title: 'Consultant java/JEE',
+            subtitle: '',
+            mail: "prenom.nom@zenika.com",
+            profils: [
+                {
+                    title: "Consultant",
+                    description: "Expertise "
+              },
+              {
+                    title: "Architecte",
+                    description: "Architecte"
+               }
+            ]
+        }
     }
 }
 
@@ -167,9 +183,18 @@ function newCvCtrl($scope, Cv, $location) {
             firstName: "Prénom",
             title: "Titre",
             subTitle: "Sous-titre",
-            exp: "6",
-            mail: "raphael.delaporte@zenika.com",
-            blog: "http://bpelsoa.blogspot.com"
+            exp: "1",
+            mail: "prenom.nom@zenika.com",
+            blog: "http://blog.com",
+            profils : [
+            {
+                title: "Consultant",
+                description: "Expertise "
+            },
+            {
+                title: "Architecte",
+                description: "Architecte"
+            }]
         }
     }
 

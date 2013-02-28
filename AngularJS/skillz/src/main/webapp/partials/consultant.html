@@ -20,10 +20,9 @@
 <div class="span12">
     <h4>Profil</h4>
     <table class="table">
-        <tr ng-repeat="profil in cv.profil">
+        <tr ng-repeat="profil in cv.profils">
             <td>{{profil.title}}</td>
-            <td>
-                <p ng-repeat="desc in profil.desc">{{desc}}</p>
+            <td><p ng-bind-html="profil.description | newlines"></p></td>
         </tr>
     </table>
 
