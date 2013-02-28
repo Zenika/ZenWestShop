@@ -34,43 +34,47 @@
 
 <div class="reveal">
 
-<!-- Any section element inside of this container is displayed as a slide -->
-<div class="slides">
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
 
-<section>
-    <h1>ZenWorkshop</h1>
+        <section>
+            <h1>ZenWorkshop</h1>
 
-    <h3>AngularJS</h3>
+            <h3>AngularJS</h3>
 
-    <p>
-        <small>Alexandre Baron & Sébastien Brousse</small>
-    </p>
-</section>
+            <p>
+                <small>Alexandre Baron & Sébastien Brousse</small>
+            </p>
+        </section>
 
-<section>
-    <h2>Caractéristiques</h2>
-    <ul>
-        <li>Framework MVC</li>
-        <li>Côté client</li>
-        <li>Javascript</li>
-        <li>Single Page Application (SPA)</li>
-        <li>Pas une librairie de composants</li>
-    </ul>
-</section>
+        <section>
+            <h2>Caractéristiques</h2>
+            <ul>
+                <li>Framework MVC</li>
+                <li>Côté client</li>
+                <li>Javascript</li>
+                <li>Single Page Application (SPA)</li>
+                <li>Pas une librairie de composants</li>
+            </ul>
+        </section>
 
-<section>
-    <h2>Fonctionnalités</h2>
-    <ul>
-        <li>Data-Binding bi-directionnel</li>
-        <li>Injection de dépendances</li>
-        <li>Testable unitairement</li>
-        <li>Etendre les balises HTML</li>
-    </ul>
-</section>
-<section>
-    <h2>Module</h2>
+        <section>
+            <h2>Fonctionnalités</h2>
+            <ul>
+                <li>Data-Binding bi-directionnel</li>
+                <li>Limite la manipulation du DOM</li>
+                <li>Injection de dépendances</li>
+                <li>Testable unitairement</li>
+                <li>Etendre les balises HTML</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Module</h2>
 
-    <p>Déclaration d'une application SPA</p>
+            <p>Déclaration d'une application SPA</p>
+    <pre><code class="java">
+        var myApp = angular.module('myApp', []);
+    </code></pre>
     <pre><code class="html">
         &lt;!doctype html&gt;
         &lt;html ng-app=&quot;myApp&quot;&gt;
@@ -84,20 +88,20 @@
             &lt;/body&gt;
         &lt;/html&gt;
     </code></pre>
-    <p class="fragment">Affiche : Hello World!</p>
-</section>
+            <p class="fragment">Affiche : Hello World!</p>
+        </section>
 
-<section>
-    <h2>Controlleur</h2>
+        <section>
+            <h2>Controlleur</h2>
 
-    <p>Fonction javascript mettant à jour le scope avec le modèle (données et fonctions)</p>
+            <p>Fonction javascript mettant à jour le scope avec le modèle (données et fonctions)</p>
     <pre><code class="java">
         var myCtrl = function($scope) {
             $scope.myVar = 'World';
             $scope.myFunc = function() {alert('Click!');}
         }
     </code></pre>
-    <p>Fournit le modèle à la vue</p>
+            <p>Fournit le modèle à la vue</p>
     <pre><code class="html">
         &lt;div ng-controller=&quot;myCtrl&quot;&gt;
             &lt;input type=&quot;text&quot; ng-model=&quot;myVar&quot;/&gt;
@@ -106,36 +110,61 @@
             &lt;/input&gt;
         &lt;/div&gt;
     </code></pre>
-</section>
+        </section>
 
-<section>
-    <h2>Services</h2>
-    <ul>
-        <li>Singleton</li>
-        <li>Permet l'injection de dépendances</li>
-        <li>Plusieurs services fournit de base ($http...)</li>
-        <li>Possibilités de créer ses services</li>
-    </ul>
-    <p>Utilisation dans un controlleur</p>
+        <section id="transitions">
+            <h2>Routage</h2>
+
+            <p>Se déplacer dans une application single page</p>
+
+<pre><code class="java">
+    myApp.config(
+    function($routeProvider) {
+        $routeProvider.when('/home', {
+        templateUrl: 'home.html', controller: HomeCtrl});
+
+        $routeProvider.when('/products/{id}', {
+        templateUrl: 'product.html', controller: ProductCtrl});
+
+        $routeProvider.otherwise({redirectTo : '/home'})
+    });
+</code></pre>
+
+            <p>Indiquer dans la vue où afficher les templates</p>
+<pre><code class="html">
+    &lt;div ng-view/&gt;
+</code></pre>
+
+        </section>
+
+        <section>
+            <h2>Services</h2>
+            <ul>
+                <li>Singleton</li>
+                <li>Permet l'injection de dépendances</li>
+                <li>Plusieurs services fournit de base ($http...)</li>
+                <li>Possibilités de créer ses services</li>
+            </ul>
+            <p>Utilisation dans un controlleur</p>
     <pre><code class="java">
         function myCtrl($scope, $http) {
             $http({method: 'GET', url: '/someUrl'}).
                 success(function(data, status, headers, config) {
                     // mise à jour du modèle
-            }).
+                }).
                 error(function(data, status, headers, config) {
                     // affichage de l'erreur
-        });
+                });
     </code></pre>
-</section>
+        </section>
 
-<section>
-    <h2>Filtres</h2>
-    <ul>
-        <li>Mettre en forme</li>
-        <li>Plusieurs filtres fournit de base (uppercase, date...)</li>
-        <li>Possibilités de créer ses filtres</li>
-    </ul>
+        <section>
+            <h2>Filtres</h2>
+            <ul>
+                <li>Mettre en forme</li>
+                <li>Plusieurs filtres fournit de base (uppercase, date...)</li>
+                <li>Possibilités de créer ses filtres</li>
+            </ul>
     <pre><code class="java">
         myApp.filter('inc',
             function() {
@@ -144,7 +173,7 @@
         );
 
     </code></pre>
-    <p>Utilisation dans la vue</p>
+            <p>Utilisation dans la vue</p>
     <pre><code class="html">
         &lt;p&gt;{{myVar | uppercase}}&lt;/p&gt;
         &lt;p&gt;{{myDate | date : 'dd/MM/yyyy'}}&lt;/p&gt;
@@ -153,16 +182,16 @@
             {{item.name}}
         &lt;/li&gt;
     </code></pre>
-</section>
+        </section>
 
-<section>
-    <h2>Directives</h2>
+        <section>
+            <h2>Directives</h2>
 
-    <p>Permet :</p>
-    <ul>
-        <li>d'étendre les balises HTML</li>
-        <li>de créer des composants</li>
-    </ul>
+            <p>Permet :</p>
+            <ul>
+                <li>d'étendre les balises HTML</li>
+                <li>de créer des composants</li>
+            </ul>
 
 <pre><code class="java">
     myApp.directive('myTag', function() { return {
@@ -173,47 +202,18 @@
     }});
 </code></pre>
 
-    <p>Utilisation en HTML</p>
+            <p>Utilisation en HTML</p>
 <pre><code class="html">
     &lt;myTag/&gt;
 </code></pre>
-</section>
+        </section>
 
-<section>
-    <h2>Assemblage</h2>
-    <p>Il faut assembler les différentes briques en javascript</p>
-    <pre><code class="java">
-        angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives']).
-        angular.module('myApp.directives', []).directive('myTag', ...);
-    </code></pre>
-</section>
 
-<section id="transitions">
-    <h2>Routage</h2>
+        <section>
+            <h1>Questions ?</h1>
+        </section>
 
-    <p>Se déplacer dans une application single page</p>
-
-    <pre><code class="java">
-        angular.module('myApp', [])
-            .config(['$routeProvider', function($routeProvider) {
-            $routeProvider.when('/home', {templateUrl: 'home.html', controller: HomeCtrl});
-            $routeProvider.when('/products/{id}', {templateUrl: 'product.html', controller: ProductCtrl});
-            $routeProvider.otherwise({redirectTo : '/home'})
-        }]);
-    </code></pre>
-
-    <p>Indiquer dans la vue où afficher les templates</p>
-    <pre><code class="html">
-        &lt;div ng-view/&gt;
-    </code></pre>
-
-</section>
-
-<section>
-    <h1>Questions ?</h1>
-</section>
-
-</div>
+    </div>
 
 </div>
 
