@@ -3,7 +3,6 @@ package org.zenika.skillz.web.pages;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Collections2;
-import com.sun.istack.internal.Nullable;
 import org.zenika.skillz.model.Competence;
 import org.zenika.skillz.model.Consultant;
 import org.zenika.skillz.model.Profil;
@@ -31,7 +30,7 @@ public class ConsultantShortResource {
     Collection<String> getTitlesOfProfils(Consultant consultant) {
         return Collections2.transform(consultant.getProfils(), new Function<Profil, String>() {
             @Override
-            public String apply(@Nullable Profil profil) {
+            public String apply(Profil profil) {
                 return profil.getTitle();
             }
         });
@@ -40,7 +39,7 @@ public class ConsultantShortResource {
     Collection<String> getCategoriesOfCompetences(Consultant consultant) {
         return Collections2.transform(consultant.getCompetences(), new Function<Competence, String>() {
             @Override
-            public String apply(@Nullable Competence competence) {
+            public String apply(Competence competence) {
                 return competence.getCategorie();
             }
         });
