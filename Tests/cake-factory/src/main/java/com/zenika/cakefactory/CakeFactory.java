@@ -1,9 +1,6 @@
 package com.zenika.cakefactory;
 
 import com.zenika.cakefactory.chaines.ChaineDeProduction;
-import com.zenika.cakefactory.chaines.impl.ChaineAssemblageTarte;
-import com.zenika.cakefactory.chaines.impl.ChaineGarnitureChoco;
-import com.zenika.cakefactory.chaines.impl.ChainePateTarte;
 import com.zenika.cakefactory.produits.sousproduits.Gateau;
 import com.zenika.cakefactory.produits.sousproduits.Melange;
 
