@@ -1,0 +1,15 @@
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:application-context.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<welcome-file-list>
+		<welcome-file>cake-factory.jsp</welcome-file>
+	</welcome-file-list>
+
+</web-app>
