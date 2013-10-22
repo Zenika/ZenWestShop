@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       ">
+
+	<import resource="db-context.xml"/>
+
+
+	<bean id="distributeurParent" class="com.zenika.cakefactory.composants.impl.DistributeurMaxidoseP700"
+		  abstract="true">
+		<property name="template" ref="jdbcTemplate"/>
+	</bean>
+	<bean id="distributeurFarine" parent="distributeurParent">
+		<constructor-arg value="com.zenika.cakefactory.produits.ingredients.Farine"/>
+	</bean>
+	<bean id="distributeurSucre" parent="distributeurParent">
+		<constructor-arg value="com.zenika.cakefactory.produits.ingredients.Sucre"/>
+	</bean>
+	<bean id="distributeurSucreGarniture" parent="distributeurParent">
+		<constructor-arg value="com.zenika.cakefactory.produits.ingredients.Sucre"/>
+	</bean>
+	<bean id="distributeurBeurre" parent="distributeurParent">
+		<constructor-arg value="com.zenika.cakefactory.produits.ingredients.BeurreFondu"/>
+	</bean>
+	<bean id="distributeurChocolat" parent="distributeurParent">
+		<constructor-arg value="com.zenika.cakefactory.produits.ingredients.ChocolatFondu"/>
+	</bean>
+	<bean id="distributeurCremeFraiche" parent="distributeurParent">
+		<constructor-arg value="com.zenika.cakefactory.produits.ingredients.CremeFraiche"/>
+	</bean>
+	<bean id="distributeurLait" parent="distributeurParent">
+		<constructor-arg value="com.zenika.cakefactory.produits.ingredients.Lait"/>
+	</bean>
+	<bean id="distributeurOeuf" parent="distributeurParent">
+		<constructor-arg value="com.zenika.cakefactory.produits.ingredients.Oeuf"/>
+	</bean>
+	<bean id="distributeurPepitesChocolat" parent="distributeurParent">
+		<constructor-arg value="com.zenika.cakefactory.produits.ingredients.PepitesDeChocolat"/>
+	</bean>
+
+	<bean id="melangeurPate" class="com.zenika.cakefactory.composants.impl.MelangeurTornadoPlusIII"/>
+	<bean id="melangeurGarniture" class="com.zenika.cakefactory.composants.impl.MelangeurTornadoPlusIII"/>
+	<bean id="lamineuse" class="com.zenika.cakefactory.composants.impl.LamineuseMegaLamix"/>
+	<bean id="injecteur" class="com.zenika.cakefactory.composants.impl.InjecteurTurboNappeurPlus"/>
+	<bean id="four" class="com.zenika.cakefactory.composants.impl.FourInferno2000"/>
+	<bean id="frigo" class="com.zenika.cakefactory.composants.impl.FrigogidaireIcyStar"/>
+
+
+</beans>
