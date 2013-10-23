@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>ZenWorkshop - Tests</title>
+    <meta name="description" content="Tester c'est douter ?">
+    <meta name="author" content="Guillaume Tinon">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+        document.write('<link rel="stylesheet" href="css/print/' + ( window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">');
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+
+        <section>
+            <h1>ZenWorkshop</h1>
+            <h3>Tester c'est douter ?</h3>
+            <p>
+                <small>Guillaume Tinon</small>
+            </p>
+        </section>
+
+        <section>
+            <h2>De la testologie des machines</h2>
+            <ul>
+                <li>A quoi ca sert ?</li>
+                <li>Quelle est la différence entre un bon testeur et un mauvais testeur ?</li>
+                <li>La hype du TDD</li>
+                <li>Les assertions</li>
+                <li>Mocks vs Stubs</li>
+                <li>Tests d'intégration</li>
+                <li>Tester sa GUI en 10 leçons</li>
+                <li>Outils et trucs à suivre</li>
+            </ul>
+        </section>
+
+        <section>
+			<section>
+				<h2>A quoi ca sert ?</h2>
+			</section>
+			<section>
+				<h2><span class="red">Wrong</span></h2>
+				<ul>
+					<li>Rien... d'ailleurs, je pars</li>
+					<li>Faire passer Jenkins au rouge</li>
+					<li>Allonger la durée du build pour faire croire que je produis</li>
+				</ul>
+			</section>
+			<section>
+				<h2><span class="green">Good</span></h2>
+				<ul>
+					<li>Eviter les bugs</li>
+					<li>Avoir confiance</li>
+					<ul>
+						<li>Refactorer sans peur de tout casser</li>
+						<li>Laisser coder le stagiaire en toute sérénité</li>
+					</ul>
+					<li>Améliorer le design</li>
+					<li>Documentation par l'exemple</li>
+					<li>Produire des graphiques</li>
+				</ul>
+				<br/>
+				<br/>
+				<p class="fragment">Et un chef avec un beau graphique est un chef heureux :-)</p>
+			</section>
+			<section>
+				<h2>Les type de tests</h2>
+				<ul>
+					<li>
+						Test unitaire
+						<ul>
+							<li>on teste UNE SEULE CLASSE</li>
+							<li>toutes les dépendances sont bouchonnées</li>
+						</ul>
+					</li>
+					<li>
+						Test d'intégration "standalone"
+						<ul>
+							<li>on teste une classe avec ses dépendances</li>
+							<li>le test démarre l'infrastructure requise</li>
+						</ul>
+					</li>
+					<li>
+						Test d'intégration
+						<ul>
+							<li>on teste une fonctionnalité complète</li>
+							<li>
+								toute l'infrastructure est déjà en place
+								<ul>
+									<li>serveur démarré</li>
+									<li>BDD avec schéma et certaines données</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li>Test de performances</li>
+				</ul>
+			</section>
+        </section>
+		
+        <section>
+			<section>
+				<h2>Quelle est la différence entre un bon testeur et un mauvais testeur ?</h2>
+			</section>
+
+			<section>
+				<h2>Le mauvais testeur, il voit du code, il teste...</h2>
+				<ul>
+					<li>le framework</li>
+					<li>TOUTES ses méthodes</li>
+					<li>les détails d'implémentation</li>
+					<li>sans factoriser</li>
+					<li>que son test est bien écrit</li>
+					<li>en dépendant des tests précédents</li>
+					<li>en ajoutant du code de test dans le code métier</li>
+					<li>chaque test prend plus de quelques secondes</li>
+				</ul>
+			</section>
+			<section>
+				<h2>Alors que le bon testeur, il voit du code, il teste...</h2>
+				<ul>
+					<li>les méthodes importantes</li>
+					<li>en nettoyant AVANT chaque test</li>
+					<li>chaque test s'execute rapidement</li>
+				</ul>
+			</section>
+		</section>
+		
+		<section>
+			<section>
+				<h2>La hype du TDD</h2>
+				<br/>
+				<div>
+					<p class="red">Ton chef</p>
+					<q>On va faire du Test Driven Development !</q>
+				</div>
+				<br/>
+				<div>
+					<p class="red">La réalité</p>
+					<p>On va peut-être faire un peu de <em>Test First Development</em></p>
+				</div>
+			</section>
+			<section>
+				<h2>Le vrai TDD</h2>
+				<ol>
+					<li class="fragment">Ecrire un test qui échoue</li>
+					<li class="fragment">
+						Le faire passer en écrivant du code dans la méthode de test
+						<ul>
+							<li>"first make it work, then make it pretty"</li>
+						</ul>
+					</li>
+					<li class="fragment">
+						En cas de duplication, extraire le code dans une méthode
+						<ul>
+							<li>nécessite d'écrire plusieurs tests</li>
+							<li>on créé la méthode dans la classe de test</li>
+						</ul>
+					</li>
+					<li class="fragment">Si plusieurs méthodes forment un ensemble cohérent, les extraire dans une classe</li>
+					<li class="fragment">Refactorer</li>
+					<li class="fragment">Recommencer</li>
+				</ol>
+			</section>
+		</section>
+		
+		<section>
+			<section>
+				<h2>Les assertions</h2>
+				<h3>JUnit vs Fest</h3>
+				<br/>
+				<p class="bleue">JUnit</p>
+				<ul>
+					<li>n méthodes assert*()</li>
+					<li>verbeux</li>
+					<li>imports statiques pénibles</li>
+				</ul>
+				<br/>
+				<br/>
+				<p class="bleue">Fest Assert</p>
+				<ul>
+					<li>1 méthode assertThat()</li>
+					<li>fluent API</li>
+					<li>auto-complétion</li>
+				</ul>
+			</section>
+			
+			<section>
+				<h2>Les assertions</h2>
+				<h3>bonus</h3>
+				<p>2 méthodes pour vérifier qu'une exception est lancée</p>
+	<pre><code class="java">
+		@Test
+		public void testMaSuperMethodeQuiPlante() {
+		    try {
+		        truc.maSuperMethodeQuiPlante();
+		        fail();
+		    } catch(Exception e) {
+		        assertEquals(MonException.class, e.getClass());
+		    }
+		}
+    </code></pre>
+	<pre><code class="java">
+		@Test(expected = MonException.class)
+		public void testMaSuperMethodeQuiPlante() {
+		    truc.maSuperMethodeQuiPlante();
+		}
+	</code></pre>
+			</section>
+		</section>
+			
+		<section>
+			<section>
+				<h2>Mocks vs Stubs</h2>
+				<h4>Stubs</h4>
+				<ul>
+					<li>implémentation manuelle d'une interface</li>
+					<li>toutes les méthodes doivent être implémentées</li>
+					<li>coût de maintenance</li>
+					<li>possibilité de conserver un état</li>
+				</ul>
+			</section>
+			<section>
+				<h2>Mocks vs Stubs</h2>
+				<h4>Mocks</h4>
+				<ul>
+					<li>objet généré dynamiquement à partir d'une interface</li>
+					<li>types de retour par défaut pour les méthodes</li>
+					<li>configurable</li>
+					<li>pas d'état</li>
+					<li>
+						vérifications possibles sur les appels de méthodes
+						<ul>
+							<li>nombre d'appels</li>
+							<li>valeurs des arguments</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+			<section>
+				<h2>Mockito</h2>
+	<pre><code class="java">
+		// prepare
+		MonInterface dep = mock(MonInterface.class);
+		when(dep.methodeUtile(anyString(), eq("plop"))).thenReturn(...);
+		monObjetATester.setDependance(dep);
+		
+		// test
+		monObjetATester.methodeATester();
+		
+		// checks
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+		verify(dep, times(2)).methodeUtile(captor.capture(), anyString());
+		assertThat(captor.getAllValues())
+		    .isEqualTo(Lists.newArrayList("aaa", "bbb"));
+	</code></pre>
+			</section>
+        </section>
+				
+		<section>
+			<section>
+				<h2>Tests d'intégration</h2>
+				<h4>Préparer sa BDD avec DbSetup</h4>
+	<pre><code class="java">
+		@Before
+		public void setUp() {
+		    Operation deleteAll = deleteAllFrom("MaTable1", "MaTable2"...);
+		    Operation insert = insertInto("MaTable1")
+		        .columns(...)
+		        .values(...)
+		        .build();
+		    Operation setup = sequenceOf(deleteAll, insert);
+		    DataSourceDestination dest = new DataSourceDestination(ds);
+		    DbSetup dbSetup = new DbSetup(dest, setup);
+		    dbSetupTracker.launchIfNecessary(dbSetup);
+		}
+	</code></pre>
+	<pre><code class="java">
+		@Test
+		public void testReadOnly() {
+		    dbSetupTracker.skipNextLaunch();
+		    ...
+		}
+	</code></pre>
+			</section>
+			<section>
+				<h2>Tests d'intégration avec Spring</h2>
+	<pre><code class="java">
+		@RunWith(SpringJUnit4ClassRunner.class)
+		@ContextConfiguration("classpath:application-context.xml")
+		public class MonComposantIT {
+	</code></pre>
+		    
+	<pre><code class="java">
+		@BeforeTransaction
+		public void setUpBeforeTx() {}
+		
+		@Before
+		public void setUp() {}
+		
+		@Autowired
+		private MonDao monDao;
+		
+		@Test
+		@Transactional
+		public void testMaMethode() {
+		    monDao.maMethodeATester();
+		    ...
+		}
+	</code></pre>
+			</section>
+        </section>
+		
+		<section>
+            <h2>Tester sa GUI en 10 leçons</h2>
+            <h2>Selenium</h2>
+	<pre><code class="java">
+		driver = new HtmlUnitDriver();
+		driver.get("http://localhost:8080");
+
+		WebElement bouton = driver.findElementById("monId");
+		bouton.click();
+		
+		bouton = driver.findElementById("monId");
+		assertEquals("Go go go !", bouton.getText());
+	</code></pre>
+        </section>
+		
+        <section>
+            <h2>Outils et trucs à suivre</h2>
+			<ul>
+				<li>Cobertura</li>
+				<li>Infinitest</li>
+				<li>Spock</li>
+			</ul>
+        </section>
+		
+		<section>
+            <h1>Questions ?</h1>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.min.js"></script>
+
+<script>
+
+    // Full list of configuration options available here:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+            { src: 'lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            } },
+            { src: 'plugin/markdown/showdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            } },
+            { src: 'plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            } },
+            { src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+                hljs.initHighlightingOnLoad();
+            } },
+            { src: 'plugin/zoom-js/zoom.js', async: true, condition: function () {
+                return !!document.body.classList;
+            } },
+            { src: 'plugin/notes/notes.js', async: true, condition: function () {
+                return !!document.body.classList;
+            } }
+            // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+    });
+
+</script>
+
+</body>
+</html>
