@@ -2,6 +2,7 @@ package com.zenika.cakefactory.composants.impl;
 
 import com.zenika.cakefactory.composants.Distributeur;
 import com.zenika.cakefactory.produits.ingredients.Ingredient;
+import com.zenika.cakefactory.util.PhysiqueNonRespecteeException;
 import com.zenika.cakefactory.util.YapudstockException;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -21,6 +22,10 @@ public class DistributeurMaxidoseP700<OUT extends Ingredient> implements Distrib
 
 	@Override
 	public OUT verserDose(int masse) {
+		if (masse < 0) {
+			throw new PhysiqueNonRespecteeException();
+		}
+
 		int stock = template.queryForObject("select quantity from Stock where ingredient=?", Integer.class,
 				typeIngredient.getSimpleName());
 
