@@ -47,5 +47,29 @@
 	<bean id="four" class="com.zenika.cakefactory.composants.impl.FourInferno2000"/>
 	<bean id="frigo" class="com.zenika.cakefactory.composants.impl.FrigogidaireIcyStar"/>
 
+	<bean id="chainePateTarte" class="com.zenika.cakefactory.chaines.impl.ChainePateTarte">
+		<property name="distributeurBeurre" ref="distributeurBeurre"/>
+		<property name="distributeurFarine" ref="distributeurFarine"/>
+		<property name="distributeurSucre" ref="distributeurSucre"/>
+		<property name="distributeurOeufs" ref="distributeurOeuf"/>
+		<property name="lamineuse" ref="lamineuse"/>
+		<property name="melangeur" ref="melangeurPate"/>
+	</bean>
+	<bean id="chaineGarnitureChoco" class="com.zenika.cakefactory.chaines.impl.ChaineGarnitureChoco">
+		<property name="distributeurChocolat" ref="distributeurChocolat"/>
+		<property name="distributeurCremeFraiche" ref="distributeurCremeFraiche"/>
+		<property name="distributeurSucre" ref="distributeurSucreGarniture"/>
+		<property name="melangeur" ref="melangeurGarniture"/>
+	</bean>
+	<bean id="chaineAssemblageTarte" class="com.zenika.cakefactory.chaines.impl.ChaineAssemblageTarte">
+		<property name="four" ref="four"/>
+		<property name="injecteur" ref="injecteur"/>
+		<property name="refrigerateur" ref="frigo"/>
+	</bean>
+	<bean id="cakeFactory" class="com.zenika.cakefactory.CakeFactory">
+		<property name="chainePateTarte" ref="chainePateTarte"/>
+		<property name="chaineGarnitureChoco" ref="chaineGarnitureChoco"/>
+		<property name="chaineAssemblageTarte" ref="chaineAssemblageTarte"/>
+	</bean>
 
 </beans>
