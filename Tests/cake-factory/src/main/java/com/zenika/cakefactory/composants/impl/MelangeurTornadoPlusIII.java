@@ -64,6 +64,11 @@ public class MelangeurTornadoPlusIII implements Melangeur {
 		return ingredients;
 	}
 
+	/**
+	 * Groupe les ingredients identiques: 2 Farines => 1 Farine
+	 *
+	 * @param ingredients tous les ingredients
+	 */
 	protected void fusionnerIngredientsIdentiques(Set<Ingredient> ingredients) {
 		Map<Class<? extends Ingredient>, Ingredient> ingredientsByType = new HashMap<>();
 		for (Ingredient currIngredient : ingredients) {
