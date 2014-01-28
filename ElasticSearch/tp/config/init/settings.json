@@ -1,0 +1,77 @@
+{
+        "settings" : {
+                "index.number_of_replicas":1,
+                "index.number_of_shards":5,
+		"index.refresh_interval":1,
+                "index" : {
+                        "analysis" : {
+                                "filter" : {
+								"c_stop_fr" : {
+                                                "type" : "stop",
+                                                "stopwords_path" : "stopwords-fr.txt",
+                                                "ignore_case" : "true"
+                                        },
+                                        "c_word_delimiter" : {
+                                                "type" : "word_delimiter",
+                                                "generate_word_parts" : "true",
+                                                "generate_number_parts" : "false",
+                                                "preserve_original" : "true",
+                                                "split_on_case_change" : "false",
+                                                "split_on_numerics" : "false",
+                                                "stem_english_possessive" : "true",
+                                                "catenate_words" : "false",
+                                                "catenate_numbers" : "false",
+                                                "catenate_all" : "false"
+                                        },
+					"c_length_filter": {
+						"type": "length",
+						"min": 3
+					},
+					"c_stem_fr": {
+						"type": "stemmer",
+						"name": "french"
+					}
+                                },
+				"tokenizer": {
+					"c_tokenizer": {
+						"type": "pattern",
+						"pattern": "[^\\w]+"
+						}
+				},
+				"char_filter": {
+				},
+				"analyzer" : {
+                                        "default" : {
+						"alias": ["c_analyzer_fr"],
+                                                "type" : "custom",
+                                                "tokenizer" : "c_tokenizer",
+                                                "filter" : [
+                                                        "standard",
+                                                        "lowercase",
+                                                        "asciifolding",
+                                                        "trim",
+                                                        "c_word_delimiter",
+							"c_stem_fr"
+                                                ],
+						"char_filter" : ["html_strip"]
+                                        },
+                                        "c_analyzer_fr" : {
+                                                "type" : "custom",
+                                                "tokenizer" : "c_tokenizer",
+                                                "filter" : [
+                                                        "standard",
+                                                        "lowercase",
+                                                        "asciifolding",
+                                                        "trim",
+                                                        "c_stop_fr",
+							"c_length_filter",
+                                                        "c_word_delimiter",
+							"c_stem_fr"
+                                                ],
+						"char_filter" : ["html_strip"]
+                                        }
+                                }
+                        }
+                }
+        }
+}

@@ -1,0 +1,58 @@
+{
+  "book" : {
+        	"dynamic_date_formats" : ["yyyy-MM-dd","dd-MM-yyyy"],
+        	"_all" : {
+			"enabled" : false
+		},
+        	"_source" : {
+			"enabled" : false,
+			"compress" : false
+		},
+        	"_size" : {
+			"enabled" : false
+		},
+        	"dynamic":true,
+        	"properties" : {
+			"isbn" : {
+				"type" : "string",
+				"store": "Yes",
+				"index" : "not_analyzed",
+				"null_value" : ""
+			},
+			"name" : {
+				"type" : "string",
+				"store" : "Yes",
+				"index" : "analyzed",
+				"null_value" : ""
+			},
+			"description" : {
+				"type" : "string",
+				"store" : "No",
+				"index" : "analyzed",
+				"null_value" : ""
+			},
+			"auteurs":{
+				"properties":{
+					"firstname":{
+						"type":"string",
+						"store" : "Yes",
+						"index":"analyzed"
+					},
+					"lastname":{
+						"type":"string",
+						"store" : "Yes",
+						"index":"analyzed"
+					}
+				}
+			},
+			"texte" : {
+				"type" : "string",
+				"store" : "Yes",
+				"index" : "analyzed",
+				"index_options" : "positions",
+				"analyzer" : "c_analyzer_fr",
+				"null_value" : "N.A"
+			}
+        	}
+	}
+}
